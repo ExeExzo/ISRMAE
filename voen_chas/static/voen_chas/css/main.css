@@ -1,0 +1,70 @@
+.heade{
+    background-color: #09106A;
+}
+
+
+.bar{
+    color: white;
+    font-size: 22px;
+    margin: 10px;
+}
+
+.text-warning{
+    margin-top: auto;
+    margin-bottom: 0rem;
+    font-size: 22px;
+    font-weight: bold;
+}
+  
+.links{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 900px;
+}
+
+.vchlar{
+  text-decoration: none;
+}
+
+.vchsel{
+  margin-left: auto;
+  margin-right: auto;
+  margin-block-end: auto;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  width: 1200px;
+}
+
+.table{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 1200px;
+  
+}
+
+.hor_l{
+  margin-left: auto;
+  margin-right: auto;
+  border-width: 3px;
+  width: 1200px;
+}
+
+.zagol{
+  text-align: center;
+  color: #09106A;
+  margin-bottom: 20px;
+  font-weight: bold;
+  margin-top: 50px;
+}
+
+.zagol_1{
+  text-align: center;
+  color: #09106A;
+  margin-bottom: 30px;
+  font-weight: bold;
+  margin-top: 50px;
+}

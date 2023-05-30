@@ -1,0 +1,35 @@
+{% extends 'main/statistics.html' %}
+
+{% block att %}
+<div class="rod_voiska">
+    <h3 class="zagol">Перечень АТ</h3>
+    
+    {% for i in buttons %}
+    <button onclick="location.href='../obshi/' + {{i.id_voiskovie_chasti}}" id="2" type="button" class="btn rod">{{i.name}}</button>
+      {% if forloop.counter == 5 or forloop.counter == 10 or forloop.counter == 15 or forloop.counter == 20 or forloop.counter == 25 or forloop.counter == 30 or forloop.counter == 35 or forloop.counter == 40 %}
+      <br>
+      {% endif %}
+      
+    {%endfor%}
+    
+  
+    <!-- {{ vch0002leg.sum_need }}
+    {{ vch0002leg.sum_available }}
+    {{ vch0002leg.sum_shortage }}
+    {{ vch0002leg.sum_excess }}
+
+    {{ vch0003leg.sum_need }}
+    {{ vch0003leg.sum_available }}
+    {{ vch0003leg.sum_shortage }}
+    {{ vch0003leg.sum_excess }}
+
+    {{ vch0004leg.sum_need }}
+    {{ vch0004leg.sum_available }}
+    {{ vch0004leg.sum_shortage }}
+    {{ vch0004leg.sum_excess }} -->
+  </div>
+{% endblock %}
+
+{% block zagol %}
+<h4 class="zagol">ГУС</h4>
+{% endblock %}

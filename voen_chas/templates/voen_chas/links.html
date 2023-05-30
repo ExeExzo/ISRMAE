@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISMTO</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'voen_chas\css\main.css' %}">
+</head>
+<body>
+    <header class="d-flex justify-content-center py-3 heade">
+        <svg class="bi me-2" width="80" height="32"><use xlink:href="#bootstrap"></use></svg>
+
+        <a  class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Coat_of_arms_military-of-kazakhstan.svg/1200px-Coat_of_arms_military-of-kazakhstan.svg.png" alt="" style="height: 70px; margin-right: 15px;">
+            <p class="text-warning" >Информационная система <br>учета состояния военной автомобильной техники</p>
+          </a>
+
+
+          <a href="{% url 'admin:index' %}" class="bar">Объект АТ</a>
+
+
+        <svg class="bi me-2" width="80" height="32"><use xlink:href="#bootstrap"></use></svg>
+      </header>
+      
+
+      
+     <div class="links" style="width: 1100px; margin-right: auto; margin-left: auto; margin-top:30px;">
+      <a class="vchlar" href="{% url 'links' %}">Все ссылки</a><hr>
+      <a class="vchlar" href="{% url 'aiagoz_rech' %}">aiagoz_rech</a><hr>
+      <a class="vchlar" href="{% url 'aktau_rech' %}">aktau_rech</a><hr>
+      <a class="vchlar" href="{% url 'aktobe_rech' %}">aktobe_rech</a><hr>
+      <a class="vchlar" href="{% url 'almaty_rech' %}">almaty_rech</a><hr>
+      <a class="vchlar" href="{% url 'balhash_rech' %}">balhash_rech</a><hr>
+      <a class="vchlar" href="{% url 'center_podgatovki_policii' %}">center_podgatovki_policii</a><hr>
+      <a class="vchlar" href="{% url 'cska' %}">cska</a><hr>
+      <a class="vchlar" href="{% url 'dau_21' %}">dau_21</a><hr>
+      <a class="vchlar" href="{% url 'dau_22' %}">dau_22</a><hr>
+      <a class="vchlar" href="{% url 'dau_23' %}">dau_23</a><hr>
+      <a class="vchlar" href="{% url 'dau_24' %}">dau_24</a><hr>
+      <a class="vchlar" href="{% url 'dau_25' %}">dau_25</a><hr>
+      <a class="vchlar" href="{% url 'dau_26' %}">dau_26</a><hr>
+      <a class="vchlar" href="{% url 'ddo_akmol_obl' %}">ddo_akmol_obl</a><hr>
+      <a class="vchlar" href="{% url 'ddo_aktobinsk' %}">ddo_aktobinsk</a><hr>
+      <a class="vchlar" href="{% url 'ddo_almaty' %}">ddo_almaty</a><hr>
+      <a class="vchlar" href="{% url 'ddo_atyrau' %}">ddo_atyrau</a><hr>
+      <a class="vchlar" href="{% url 'ddo_kostanai' %}">ddo_kostanai</a><hr>
+      <a class="vchlar" href="{% url 'ddo_mangistau_obl' %}">ddo_mangistau_obl</a><hr>
+      <a class="vchlar" href="{% url 'ddo_petropavlsk' %}">ddo_petropavlsk</a><hr>
+      <a class="vchlar" href="{% url 'ddo_uko' %}">ddo_uko</a><hr>
+      <a class="vchlar" href="{% url 'ddo_zham' %}">ddo_zham</a><hr>
+      <a class="vchlar" href="{% url 'ddo_zko_oral' %}">ddo_zko_oral</a><hr>
+      <a class="vchlar" href="{% url 'ddo_zko_oral2' %}">ddo_zko_oral2</a><hr>
+      <a class="vchlar" href="{% url 'gdo' %}">gdo</a><hr>
+      <a class="vchlar" href="{% url 'gvar_rech' %}">gvar_rech</a><hr>
+      <a class="vchlar" href="{% url 'gvp' %}">gvp</a><hr>
+      <a class="vchlar" href="{% url 'kadet_korpus' %}">kadet_korpus</a><hr>
+      <a class="vchlar" href="{% url 'kapshagay_rech' %}">kapshagay_rech</a><hr>
+      <a class="vchlar" href="{% url 'karaganda_rech' %}">karaganda_rech</a><hr>
+      <a class="vchlar" href="{% url 'nuo_mork' %}">nuo_mork</a><hr>
+      <a class="vchlar" href="{% url 'nvcp' %}">nvcp</a><hr>
+      <a class="vchlar" href="{% url 'otdel_dir_atyrau_garn' %}">otdel_dir_atyrau_garn</a><hr>
+      <a class="vchlar" href="{% url 'otdel_dir_kostanai_garn' %}">otdel_dir_kostanai_garn</a><hr>
+      <a class="vchlar" href="{% url 'otdel_dir_shuchinsk_garn' %}">otdel_dir_shuchinsk_garn</a><hr>
+      <a class="vchlar" href="{% url 'ovop' %}">ovop</a><hr>
+      <a class="vchlar" href="{% url 'ovp_aiagoz_garn' %}">ovp_aiagoz_garn</a><hr>
+      <a class="vchlar" href="{% url 'ovp_akmola_rg' %}">ovp_akmola_rg</a><hr>
+      <a class="vchlar" href="{% url 'ovp_aktau_garn' %}">ovp_aktau_garn</a><hr>
+      <a class="vchlar" href="{% url 'ovp_aktobe_garn' %}">ovp_aktobe_garn</a><hr>
+      <a class="vchlar" href="{% url 'ovp_almaty_rg' %}">ovp_almaty_rg</a><hr>
+      <a class="vchlar" href="{% url 'ovp_balhash_garn' %}">ovp_balhash_garn</a><hr>
+      <a class="vchlar" href="{% url 'ovp_gvar_garn' %}">ovp_gvar_garn</a><hr>
+      <a class="vchlar" href="{% url 'ovp_kapshagai_garn' %}">ovp_kapshagai_garn</a><hr>
+      <a class="vchlar" href="{% url 'ovp_karaganda_garn' %}">ovp_karaganda_garn</a><hr>
+      <a class="vchlar" href="{% url 'ovp_obespechenie_bezopasnosti_mo_rk' %}">ovp_obespechenie_bezopasnosti_mo_rk</a><hr>
+      <a class="vchlar" href="{% url 'ovp_priozersk_garn' %}">ovp_priozersk_garn</a><hr>
+      <a class="vchlar" href="{% url 'ovp_sariozen_garn' %}">ovp_sariozen_garn</a><hr>
+      <a class="vchlar" href="{% url 'ovp_semey_rg' %}">ovp_semey_rg</a><hr>
+      <a class="vchlar" href="{% url 'ovp_shimken_garn' %}">ovp_shimken_garn</a><hr>
+      <a class="vchlar" href="{% url 'ovp_taldikorgan_garn' %}">ovp_taldikorgan_garn</a><hr>
+      <a class="vchlar" href="{% url 'ovp_taraz_garn' %}">ovp_taraz_garn</a><hr>
+      <a class="vchlar" href="{% url 'ovp_usharal_garn' %}">ovp_usharal_garn</a><hr>
+      <a class="vchlar" href="{% url 'ovp_ustkamen_garn' %}">ovp_ustkamen_garn</a><hr>
+      <a class="vchlar" href="{% url 'rpngsh' %}">rpngsh</a><hr>
+      <a class="vchlar" href="{% url 'sariozen_rech' %}">sariozen_rech</a><hr>
+      <a class="vchlar" href="{% url 'semeys_rech' %}">semeys_rech</a><hr>
+      <a class="vchlar" href="{% url 'shimken_rech' %}">shimken_rech</a><hr>
+      <a class="vchlar" href="{% url 'shuchin_rech' %}">shuchin_rech</a><hr>
+      <a class="vchlar" href="{% url 'taldikorgan_rech' %}">taldikorgan_rech</a><hr>
+      <a class="vchlar" href="{% url 'taraz_rech' %}">taraz_rech</a><hr>
+      <a class="vchlar" href="{% url 'upravlenie_gurv' %}">upravlenie_gurv</a><hr>
+      <a class="vchlar" href="{% url 'usharal_rech' %}">usharal_rech</a><hr>
+      <a class="vchlar" href="{% url 'ust_kamen_rech' %}">ust_kamen_rech</a><hr>
+      <a class="vchlar" href="{% url 'vch_gvkg' %}">vch_gvkg</a><hr>
+      <a class="vchlar" href="{% url 'vch_vvt' %}">vch_vvt</a><hr>
+      <a class="vchlar" href="{% url 'vch00001_akkol' %}">vch00001_akkol</a><hr>
+      <a class="vchlar" href="{% url 'vch00001_gvardeiski' %}">vch00001_gvardeiski</a><hr>
+      <a class="vchlar" href="{% url 'vch00001_temirtau' %}">vch00001_temirtau</a><hr>
+      <a class="vchlar" href="{% url 'vch00002_astana_untiv' %}">vch00002_astana_untiv</a><hr>
+      <a class="vchlar" href="{% url 'vch00002_gus' %}">vch00002_gus</a><hr>
+      <a class="vchlar" href="{% url 'vch00003_almaty_gus' %}">vch00003_almaty_gus</a><hr>
+      <a class="vchlar" href="{% url 'vch00003_almaty_guv' %}">vch00003_almaty_guv</a><hr>
+      <a class="vchlar" href="{% url 'vch00003_shamalgan' %}">vch00003_shamalgan</a><hr>
+      <a class="vchlar" href="{% url 'vch00004_almaty_gus' %}">vch00004_almaty_gus</a><hr>
+      <a class="vchlar" href="{% url 'vch00004_almaty_guv' %}">vch00004_almaty_guv</a><hr>
+      <a class="vchlar" href="{% url 'vch00004_karaganda' %}">vch00004_karaganda</a><hr>
+      <a class="vchlar" href="{% url 'vch00004_priozersk' %}">vch00004_priozersk</a><hr>
+      <a class="vchlar" href="{% url 'vch00005_almaty' %}">vch00005_almaty</a><hr>
+      <a class="vchlar" href="{% url 'vch00005_semey' %}">vch00005_semey</a><hr>
+      <a class="vchlar" href="{% url 'vch00005_ushtobe' %}">vch00005_ushtobe</a><hr>
+      <a class="vchlar" href="{% url 'vch00006_almaty_14' %}">vch00006_almaty_14</a><hr>
+      <a class="vchlar" href="{% url 'vch00006_almaty_untiv' %}">vch00006_almaty_untiv</a><hr>
+      <a class="vchlar" href="{% url 'vch00006_semey' %}">vch00006_semey</a><hr>
+      <a class="vchlar" href="{% url 'vch00007_astana' %}">vch00007_astana</a><hr>
+      <a class="vchlar" href="{% url 'vch00007_kapshagai' %}">vch00007_kapshagai</a><hr>
+      <a class="vchlar" href="{% url 'vch00008_astana' %}">vch00008_astana</a><hr>
+      <a class="vchlar" href="{% url 'vch00008_temirtau' %}">vch00008_temirtau</a><hr>
+      <a class="vchlar" href="{% url 'vch00009_aktau' %}">vch00009_aktau</a><hr>
+      <a class="vchlar" href="{% url 'vch00009_karaganda' %}">vch00009_karaganda</a><hr>
+      <a class="vchlar" href="{% url 'vch00011' %}">vch00011</a><hr>
+      <a class="vchlar" href="{% url 'vch00012_aktau' %}">vch00012_aktau</a><hr>
+      <a class="vchlar" href="{% url 'vch00012' %}">vch00012</a><hr>
+      <a class="vchlar" href="{% url 'vch00013' %}">vch00013</a><hr>
+      <a class="vchlar" href="{% url 'vch00014_astana' %}">vch00014_astana</a><hr>
+      <a class="vchlar" href="{% url 'vch00014_taraz' %}">vch00014_taraz</a><hr>
+      <a class="vchlar" href="{% url 'vch00015_akmol' %}">vch00015_akmol</a><hr>
+      <a class="vchlar" href="{% url 'vch00015_astana' %}">vch00015_astana</a><hr>
+      <a class="vchlar" href="{% url 'vch00016_almaty' %}">vch00016_almaty</a><hr>
+      <a class="vchlar" href="{% url 'vch00016_astana' %}">vch00016_astana</a><hr>
+      <a class="vchlar" href="{% url 'vch00017' %}">vch00017</a><hr>
+      <a class="vchlar" href="{% url 'vch00018_aktau' %}">vch00018_aktau</a><hr>
+      <a class="vchlar" href="{% url 'vch00018_almaty' %}">vch00018_almaty</a><hr>
+      <a class="vchlar" href="{% url 'vch00019' %}">vch00019</a><hr>
+      <a class="vchlar" href="{% url 'vch00021' %}">vch00021</a><hr>
+      <a class="vchlar" href="{% url 'vch00022' %}">vch00022</a><hr>
+      <a class="vchlar" href="{% url 'vch00023' %}">vch00023</a><hr>
+      <a class="vchlar" href="{% url 'vch00024' %}">vch00024</a><hr>
+      <a class="vchlar" href="{% url 'vch00025' %}">vch00025</a><hr>
+      <a class="vchlar" href="{% url 'vch00027' %}">vch00027</a><hr>
+      <a class="vchlar" href="{% url 'vch00028' %}">vch00028</a><hr>
+      <a class="vchlar" href="{% url 'vch00029' %}">vch00029</a><hr>
+      <a class="vchlar" href="{% url 'vch00030' %}">vch00030</a><hr>
+      <a class="vchlar" href="{% url 'vch00321' %}">vch00321</a><hr>
+      <a class="vchlar" href="{% url 'vch906bit' %}">vch906bit</a><hr>
+      <a class="vchlar" href="{% url 'vch01389' %}">vch01389</a><hr>
+      <a class="vchlar" href="{% url 'vch03215' %}">vch03215</a><hr>
+      <a class="vchlar" href="{% url 'vch03218' %}">vch03218</a><hr>
+      <a class="vchlar" href="{% url 'vch03248' %}">vch03248</a><hr>
+      <a class="vchlar" href="{% url 'vch11098' %}">vch11098</a><hr>
+      <a class="vchlar" href="{% url 'vch11113' %}">vch11113</a><hr>
+      <a class="vchlar" href="{% url 'vch11971' %}">vch11971</a><hr>
+      <a class="vchlar" href="{% url 'vch12740' %}">vch12740</a><hr>
+      <a class="vchlar" href="{% url 'vch13651' %}">vch13651</a><hr>
+      <a class="vchlar" href="{% url 'vch13981' %}">vch13981</a><hr>
+      <a class="vchlar" href="{% url 'vch15236' %}">vch15236</a><hr>
+      <a class="vchlar" href="{% url 'vch15477' %}">vch15477</a><hr>
+      <a class="vchlar" href="{% url 'vch15483' %}">vch15483</a><hr>
+      <a class="vchlar" href="{% url 'vch15744' %}">vch15744</a><hr>
+      <a class="vchlar" href="{% url 'vch15871' %}">vch15871</a><hr>
+      <a class="vchlar" href="{% url 'vch16875' %}">vch16875</a><hr>
+      <a class="vchlar" href="{% url 'vch18404' %}">vch18404</a><hr>
+      <a class="vchlar" href="{% url 'vch18845' %}">vch18845</a><hr>
+      <a class="vchlar" href="{% url 'vch19876' %}">vch19876</a><hr>
+      <a class="vchlar" href="{% url 'vch20000' %}">vch20000</a><hr>
+      <a class="vchlar" href="{% url 'vch21252' %}">vch21252</a><hr>
+      <a class="vchlar" href="{% url 'vch22583' %}">vch22583</a><hr>
+      <a class="vchlar" href="{% url 'vch23231' %}">vch23231</a><hr>
+      <a class="vchlar" href="{% url 'vch23684' %}">vch23684</a><hr>
+      <a class="vchlar" href="{% url 'vch25321' %}">vch25321</a><hr>
+      <a class="vchlar" href="{% url 'vch25877' %}">vch25877</a><hr>
+      <a class="vchlar" href="{% url 'vch29108' %}">vch29108</a><hr>
+      <a class="vchlar" href="{% url 'vch31297' %}">vch31297</a><hr>
+      <a class="vchlar" href="{% url 'vch31974' %}">vch31974</a><hr>
+      <a class="vchlar" href="{% url 'vch32363' %}">vch32363</a><hr>
+      <a class="vchlar" href="{% url 'vch32674' %}">vch32674</a><hr>
+      <a class="vchlar" href="{% url 'vch32971' %}">vch32971</a><hr>
+      <a class="vchlar" href="{% url 'vch32972' %}">vch32972</a><hr>
+      <a class="vchlar" href="{% url 'vch32974' %}">vch32974</a><hr>
+      <a class="vchlar" href="{% url 'vch36898' %}">vch36898</a><hr>
+      <a class="vchlar" href="{% url 'vch36936' %}">vch36936</a><hr>
+      <a class="vchlar" href="{% url 'vch36998' %}">vch36998</a><hr>
+      <a class="vchlar" href="{% url 'vch39485' %}">vch39485</a><hr>
+      <a class="vchlar" href="{% url 'vch40336' %}">vch40336</a><hr>
+      <a class="vchlar" href="{% url 'vch41411' %}">vch41411</a><hr>
+      <a class="vchlar" href="{% url 'vch41868' %}">vch41868</a><hr>
+      <a class="vchlar" href="{% url 'vch42062' %}">vch42062</a><hr>
+      <a class="vchlar" href="{% url 'vch45621' %}">vch45621</a><hr>
+      <a class="vchlar" href="{% url 'vch45632' %}">vch45632</a><hr>
+      <a class="vchlar" href="{% url 'vch45687' %}">vch45687</a><hr>
+      <a class="vchlar" href="{% url 'vch45872' %}">vch45872</a><hr>
+      <a class="vchlar" href="{% url 'vch48386' %}">vch48386</a><hr>
+      <a class="vchlar" href="{% url 'vch48758' %}">vch48758</a><hr>
+      <a class="vchlar" href="{% url 'vch52222' %}">vch52222</a><hr>
+      <a class="vchlar" href="{% url 'vch53898' %}">vch53898</a><hr>
+      <a class="vchlar" href="{% url 'vch54310' %}">vch54310</a><hr>
+      <a class="vchlar" href="{% url 'vch55441' %}">vch55441</a><hr>
+      <a class="vchlar" href="{% url 'vch55632' %}">ovch55632k</a><hr>
+      <a class="vchlar" href="{% url 'vch55698' %}">vch55698</a><hr>
+      <a class="vchlar" href="{% url 'vch55878' %}">vch55878</a><hr>
+      <a class="vchlar" href="{% url 'vch56214' %}">vch56214</a><hr>
+      <a class="vchlar" href="{% url 'vch56321' %}">vch56321</a><hr>
+      <a class="vchlar" href="{% url 'vch56987' %}">vch56987</a><hr>
+      <a class="vchlar" href="{% url 'vch58641' %}">vch58641</a><hr>
+      <a class="vchlar" href="{% url 'vch58746' %}">vch58746</a><hr>
+      <a class="vchlar" href="{% url 'vch58917' %}">vch58917</a><hr>
+      <a class="vchlar" href="{% url 'vch61883' %}">vch61883</a><hr>
+      <a class="vchlar" href="{% url 'vch61993_saryozek' %}">vch61993_saryozek</a><hr>
+      <a class="vchlar" href="{% url 'vch61993_visv' %}">vch61993_visv</a><hr>
+      <a class="vchlar" href="{% url 'vch63219' %}">vch63219</a><hr>
+      <a class="vchlar" href="{% url 'vch63594' %}">vch63594</a><hr>
+      <a class="vchlar" href="{% url 'vch63691' %}">vch63691</a><hr>
+      <a class="vchlar" href="{% url 'vch63894' %}">vch63894</a><hr>
+      <a class="vchlar" href="{% url 'vch64896' %}">vch64896</a><hr>
+      <a class="vchlar" href="{% url 'vch65214' %}">vch65214</a><hr>
+      <a class="vchlar" href="{% url 'vch65412' %}">vch65412</a><hr>
+      <a class="vchlar" href="{% url 'vch65465' %}">vch65465</a><hr>
+      <a class="vchlar" href="{% url 'vch65468' %}">vch65468</a><hr>
+      <a class="vchlar" href="{% url 'vch65476_dh' %}">vch65476_dh</a><hr>
+      <a class="vchlar" href="{% url 'vch65476_rhbz' %}">vch65476_rhbz</a><hr>
+      <a class="vchlar" href="{% url 'vch65476_td' %}">vch65476_td</a><hr>
+      <a class="vchlar" href="{% url 'vch65496' %}">vch65496</a><hr>
+      <a class="vchlar" href="{% url 'vch65498' %}">vch65498</a><hr>
+      <a class="vchlar" href="{% url 'vch65846_karaganda' %}">vch65846_karaganda</a><hr>
+      <a class="vchlar" href="{% url 'vch65846' %}">vch65846</a><hr>
+      <a class="vchlar" href="{% url 'vch65849' %}">vch65849</a><hr>
+      <a class="vchlar" href="{% url 'vch66358' %}">vch66358</a><hr>
+      <a class="vchlar" href="{% url 'vch66963' %}">vch66963</a><hr>
+      <a class="vchlar" href="{% url 'vch68492' %}">vch68492</a><hr>
+      <a class="vchlar" href="{% url 'vch68566_beyneu' %}">vch68566_beyneu</a><hr>
+      <a class="vchlar" href="{% url 'vch68566' %}">vch68566</a><hr>
+      <a class="vchlar" href="{% url 'vch68746' %}">vch68746</a><hr>
+      <a class="vchlar" href="{% url 'vch68987' %}">vch68987</a><hr>
+      <a class="vchlar" href="{% url 'vch73928' %}">vch73928</a><hr>
+      <a class="vchlar" href="{% url 'vch79134' %}">vch79134</a><hr>
+      <a class="vchlar" href="{% url 'vch79462' %}">vch79462</a><hr>
+      <a class="vchlar" href="{% url 'vch79818' %}">vch79818</a><hr>
+      <a class="vchlar" href="{% url 'vch81657' %}">vch81657</a><hr>
+      <a class="vchlar" href="{% url 'vch84635' %}">vch84635</a><hr>
+      <a class="vchlar" href="{% url 'vch84638' %}">vch84638</a><hr>
+      <a class="vchlar" href="{% url 'vch84943' %}">vch84943</a><hr>
+      <a class="vchlar" href="{% url 'vch85059' %}">vch85059</a><hr>
+      <a class="vchlar" href="{% url 'vch85465' %}">vch85465</a><hr>
+      <a class="vchlar" href="{% url 'vch85498' %}">vch85498</a><hr>
+      <a class="vchlar" href="{% url 'vch87456' %}">vch87456</a><hr>
+      <a class="vchlar" href="{% url 'vch87951' %}">vch87951</a><hr>
+      <a class="vchlar" href="{% url 'vch88874' %}">vch88874</a><hr>
+      <a class="vchlar" href="{% url 'vch88889' %}">vch88889</a><hr>
+      <a class="vchlar" href="{% url 'vch88963' %}">vch88963</a><hr>
+      <a class="vchlar" href="{% url 'vch89516' %}">vch89516</a><hr>
+      <a class="vchlar" href="{% url 'vch89749' %}">vch89749</a><hr>
+      <a class="vchlar" href="{% url 'vch89765' %}">vch89765</a><hr>
+      <a class="vchlar" href="{% url 'vch97463' %}">vch97463</a><hr>
+      <a class="vchlar" href="{% url 'vch98463' %}">vch98463</a><hr>
+      <a class="vchlar" href="{% url 'vch98495' %}">vch98495</a><hr>
+      <a class="vchlar" href="{% url 'vch98534' %}">vch98534</a><hr>
+      <a class="vchlar" href="{% url 'vch98652' %}">vch98652</a><hr>
+      <a class="vchlar" href="{% url 'vch258961' %}">vch258961</a><hr>
+      <a class="vchlar" href="{% url 'vg_aiagoz' %}">vg_aiagoz</a><hr>
+      <a class="vchlar" href="{% url 'vg_semey' %}">vg_semey</a><hr>
+      <a class="vchlar" href="{% url 'vkg' %}">vkg</a><hr>
+      <a class="vchlar" href="{% url 'vl_karaganda' %}">vl_karaganda</a><hr>
+      <a class="vchlar" href="{% url 'vl_usharal' %}">vl_usharal</a><hr>
+      <a class="vchlar" href="{% url 'vl_ust_kamen' %}">vl_ust_kamen</a><hr>
+      <a class="vchlar" href="{% url 'zhu_almaty' %}">zhu_almaty</a><hr>
+      <a class="vchlar" href="{% url 'zhu_astana' %}">zhu_astana</a><hr>
+      <a class="vchlar" href="{% url 'zhu_karaganda' %}">zhu_karaganda</a><hr>
+    </div>
+      
+
+</body>
+</html>

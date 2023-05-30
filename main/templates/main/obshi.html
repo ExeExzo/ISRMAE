@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0-rc.1/chartjs-plugin-datalabels.min.js" integrity="sha512-+UYTD5L/bU1sgAfWA0ELK5RlQ811q8wZIocqI7+K0Lhh8yVdIoAMEs96wJAIbgFvzynPm36ZCXtkydxu1cs27w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>ISMTO</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static '\main\css\style.css' %}">
+    {% block style %}
+    {% endblock %}
+</head>
+<body>
+  
+      <header class="d-flex justify-content-center py-3 heade">
+        <svg class="bi me-2" width="80" height="32"><use xlink:href="#bootstrap"></use></svg>
+
+        <a  class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Coat_of_arms_military-of-kazakhstan.svg/1200px-Coat_of_arms_military-of-kazakhstan.svg.png" alt="" style="height: 70px; margin-right: 15px;">
+            <p class="text-warning" >Информационная система <br>учета состояния военной автомобильной техники</p>
+          </a>
+
+
+          <a href="/main/" class="bar">Главная</a>
+          <a href="/statistics/" class="bar">Аналитика</a>
+          <a href="{% url 'admin:index' %}" class="bar">Объект АТ</a>
+          <span class="bar">Имя: {{request.user}}</span>
+          <span class="bar"><a href="{% url 'logout' %}" class="bar">Logout</a></span>
+
+
+          <!-- <button type="button" class="btn bar">АТТ</button>
+          <button type="button" class="btn bar">Обьекты ВВТ</button>
+          <button type="button" class="btn bar">Справочник</button>
+          <button type="button" class="btn bar">Отчеты</button> -->
+
+
+        <svg class="bi me-2" width="80" height="32"><use xlink:href="#bootstrap"></use></svg>
+      </header>
+
+      {% block att %}
+      
+      {% endblock %}
+
+      <div class="analytics" style="margin-top: 50px">
+        <h3 class="zagol">Аналитика</h3>
+        {% block zagol %}{% endblock %}
+      </div>
+
+      <div class="rod_voiska">
+        <a href="/statistics/"><button type="button" class="btn categ">Тип АТ</button></a>
+        <a href="/gruppa_eks/"><button type="button" class="btn categ">По группам эксплутации</button></a>
+        <a href="/sort_po_category"><button type="button" class="btn categ">По категориям</button></a>
+        <a href="/sort_po_godam"><button type="button" class="btn categ">По годам</button></a>
+      </div>
+
+      <div class="content">
+        
+        <div class="att">
+          <h5 class="zagol_an">Легковые</h5>
+          <canvas id="myChart" width="440" height="400"></canvas>
+        <script>
+        const legko = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(legko, {
+            type: 'bar',
+            data: {
+                labels: ['Потребность', 'Имеется', 'Некомплект', 'Излишествует'],
+                datasets: [{
+                    label: 'Легковые',
+                    data: ['{{ result1.sum_need }}', '{{ result1.sum_available }}', '{{ result1.sum_shortage }}', '{{ result1.sum_excess }}'],
+                    backgroundColor: [
+                        'rgba(255, 15, 15)',
+                        'rgba(0, 200, 0)',
+                        'rgba(255, 255, 0)',
+                        'rgba(255, 174, 0)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 15, 15, 1)',
+                        'rgba(0, 200, 0, 1)',
+                        'rgba(255, 255, 0, 1)',
+                        'rgba(255, 174, 0, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    datalabels: {
+                        color: 'black'
+                    }
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+        
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">Бортовые</h5>
+          <canvas id="myChart2" width="440" height="400"></canvas>
+        <script>
+        const borto = document.getElementById('myChart2').getContext('2d');
+        const myChart2 = new Chart(borto, {
+            type: 'bar',
+            data: {
+                labels: ['Потребность', 'Имеется', 'Некомплект', 'Излишествует'],
+                datasets: [{
+                    label: 'Бортовые',
+                    data: ['{{ result2.sum_need }}', '{{ result2.sum_available }}', '{{ result2.sum_shortage }}', '{{ result2.sum_excess }}'],
+                    backgroundColor: [
+                        'rgba(255, 15, 15)',
+                        'rgba(0, 200, 0)',
+                        'rgba(255, 255, 0)',
+                        'rgba(255, 174, 0)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 15, 15, 1)',
+                        'rgba(0, 200, 0, 1)',
+                        'rgba(255, 255, 0, 1)',
+                        'rgba(255, 174, 0, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    datalabels: {
+                        color: 'black'
+                    }
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+        
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">Штабные</h5>
+          <canvas id="myChart3" width="440" height="400"></canvas>
+        <script>
+        const shtab = document.getElementById('myChart3').getContext('2d');
+        const myChart3 = new Chart(shtab, {
+            type: 'bar',
+            data: {
+                labels: ['Потребность', 'Имеется', 'Некомплект', 'Излишествует'],
+                datasets: [{
+                    label: 'Штабные',
+                    data: ['{{ result3.sum_need }}', '{{ result3.sum_available }}', '{{ result3.sum_shortage }}', '{{ result3.sum_excess }}'],
+                    backgroundColor: [
+                        'rgba(255, 15, 15)',
+                        'rgba(0, 200, 0)',
+                        'rgba(255, 255, 0)',
+                        'rgba(255, 174, 0)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 15, 15, 1)',
+                        'rgba(0, 200, 0, 1)',
+                        'rgba(255, 255, 0, 1)',
+                        'rgba(255, 174, 0, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    datalabels: {
+                        color: 'black'
+                    }
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+        
+        </div>
+      </div>
+      
+      <div class="content">
+        
+        <div class="att">
+          <h5 class="zagol_an">Санитарные</h5>
+          <canvas id="myChart4" width="440" height="400"></canvas>
+        <script>
+        const sanit = document.getElementById('myChart4').getContext('2d');
+        const myChart4 = new Chart(sanit, {
+            type: 'bar',
+            data: {
+                labels: ['Потребность', 'Имеется', 'Некомплект', 'Излишествует'],
+                datasets: [{
+                    label: 'Санитарные',
+                    data: ['{{ result4.sum_need }}', '{{ result4.sum_available }}', '{{ result4.sum_shortage }}', '{{ result4.sum_excess }}'],
+                    backgroundColor: [
+                        'rgba(255, 15, 15)',
+                        'rgba(0, 200, 0)',
+                        'rgba(255, 255, 0)',
+                        'rgba(255, 174, 0)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 15, 15, 1)',
+                        'rgba(0, 200, 0, 1)',
+                        'rgba(255, 255, 0, 1)',
+                        'rgba(255, 174, 0, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    datalabels: {
+                        color: 'black'
+                    }
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">Пассажирские авто</h5>
+          <canvas id="myChart5" width="440" height="400"></canvas>
+        <script>
+        const passazh = document.getElementById('myChart5').getContext('2d');
+        const myChart5 = new Chart(passazh, {
+            type: 'bar',
+            data: {
+                labels: ['Потребность', 'Имеется', 'Некомплект', 'Излишествует'],
+                datasets: [{
+                    label: 'Пассажирские авто',
+                    data: ['{{ result5.sum_need }}', '{{ result5.sum_available }}', '{{ result5.sum_shortage }}', '{{ result5.sum_excess }}'],
+                    backgroundColor: [
+                        'rgba(255, 15, 15)',
+                        'rgba(0, 200, 0)',
+                        'rgba(255, 255, 0)',
+                        'rgba(255, 174, 0)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 15, 15, 1)',
+                        'rgba(0, 200, 0, 1)',
+                        'rgba(255, 255, 0, 1)',
+                        'rgba(255, 174, 0, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    datalabels: {
+                        color: 'black'
+                    }
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">MTO</h5>
+          <canvas id="myChart6" width="440" height="400"></canvas>
+        <script>
+        const mto = document.getElementById('myChart6').getContext('2d');
+        const myChart6 = new Chart(mto, {
+            type: 'bar',
+            data: {
+                labels: ['Потребность', 'Имеется', 'Некомплект', 'Излишествует'],
+                datasets: [{
+                    label: 'MTO',
+                    data: ['{{ result6.sum_need }}', '{{ result6.sum_available }}', '{{ result6.sum_shortage }}', '{{ result6.sum_excess }}'],
+                    backgroundColor: [
+                        'rgba(255, 15, 15)',
+                        'rgba(0, 200, 0)',
+                        'rgba(255, 255, 0)',
+                        'rgba(255, 174, 0)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 15, 15, 1)',
+                        'rgba(0, 200, 0, 1)',
+                        'rgba(255, 255, 0, 1)',
+                        'rgba(255, 174, 0, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    datalabels: {
+                        color: 'black'
+                    }
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+
+        </div>
+      </div>
+
+      <div class="content">
+        
+        <div class="att">
+          <h5 class="zagol_an">УПМ</h5>
+          <canvas id="myChart7" width="445" height="400"></canvas>
+        <script>
+        const upm = document.getElementById('myChart7').getContext('2d');
+        const myChart7 = new Chart(upm, {
+            type: 'bar',
+            data: {
+                labels: ['Потребность', 'Имеется', 'Некомплект', 'Излишествует'],
+                datasets: [{
+                    label: 'УПМ',
+                    data: ['{{ result7.sum_need }}', '{{ result7.sum_available }}', '{{ result7.sum_shortage }}', '{{ result7.sum_excess }}'],
+                    backgroundColor: [
+                        'rgba(255, 15, 15)',
+                        'rgba(0, 200, 0)',
+                        'rgba(255, 255, 0)',
+                        'rgba(255, 174, 0)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 15, 15, 1)',
+                        'rgba(0, 200, 0, 1)',
+                        'rgba(255, 255, 0, 1)',
+                        'rgba(255, 174, 0, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    datalabels: {
+                        color: 'black'
+                    }
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">ПАРМ</h5>
+          <canvas id="myChart8" width="445" height="400"></canvas>
+        <script>
+        const parm = document.getElementById('myChart8').getContext('2d');
+        const myChart8 = new Chart(parm, {
+            type: 'bar',
+            data: {
+                labels: ['Потребность', 'Имеется', 'Некомплект', 'Излишествует'],
+                datasets: [{
+                    label: 'ПАРМ',
+                    data: ['{{ result8.sum_need }}', '{{ result8.sum_available }}', '{{ result8.sum_shortage }}', '{{ result8.sum_excess }}'],
+                    backgroundColor: [
+                        'rgba(255, 15, 15)',
+                        'rgba(0, 200, 0)',
+                        'rgba(255, 255, 0)',
+                        'rgba(255, 174, 0)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 15, 15, 1)',
+                        'rgba(0, 200, 0, 1)',
+                        'rgba(255, 255, 0, 1)',
+                        'rgba(255, 174, 0, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    datalabels: {
+                        color: 'black'
+                    }
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">Колесные эвакотягачи</h5>
+          <canvas id="myChart9" width="445" height="400"></canvas>
+        <script>
+        const kol_eva = document.getElementById('myChart9').getContext('2d');
+        const myChart9 = new Chart(kol_eva, {
+            type: 'bar',
+            data: {
+                labels: ['Потребность', 'Имеется', 'Некомплект', 'Излишествует'],
+                datasets: [{
+                    label: 'Колесные эвакотягачи',
+                    data: ['{{ result9.sum_need }}', '{{ result9.sum_available }}', '{{ result9.sum_shortage }}', '{{ result9.sum_excess }}'],
+                    backgroundColor: [
+                        'rgba(255, 15, 15)',
+                        'rgba(0, 200, 0)',
+                        'rgba(255, 255, 0)',
+                        'rgba(255, 174, 0)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 15, 15, 1)',
+                        'rgba(0, 200, 0, 1)',
+                        'rgba(255, 255, 0, 1)',
+                        'rgba(255, 174, 0, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    datalabels: {
+                        color: 'black'
+                    }
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+
+        </div>
+      </div>
+      
+      <div class="content">
+        
+        <div class="att">
+          <h5 class="zagol_an">Гусеничные тягачи</h5>
+          <canvas id="myChart10" width="445" height="400"></canvas>
+        <script>
+        const gusen = document.getElementById('myChart10').getContext('2d');
+        const myChart10 = new Chart(gusen, {
+            type: 'bar',
+            data: {
+                labels: ['Потребность', 'Имеется', 'Некомплект', 'Излишествует'],
+                datasets: [{
+                    label: 'Гусеничные тягачи',
+                    data: ['{{ result10.sum_need }}', '{{ result10.sum_available }}', '{{ result10.sum_shortage }}', '{{ result10.sum_excess }}'],
+                    backgroundColor: [
+                        'rgba(255, 15, 15)',
+                        'rgba(0, 200, 0)',
+                        'rgba(255, 255, 0)',
+                        'rgba(255, 174, 0)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 15, 15, 1)',
+                        'rgba(0, 200, 0, 1)',
+                        'rgba(255, 255, 0, 1)',
+                        'rgba(255, 174, 0, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    datalabels: {
+                        color: 'black'
+                    }
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">Тракторы</h5>
+          <canvas id="myChart11" width="445" height="400"></canvas>
+        <script>
+        const traktor = document.getElementById('myChart11').getContext('2d');
+        const myChart11 = new Chart(traktor, {
+            type: 'bar',
+            data: {
+                labels: ['Потребность', 'Имеется', 'Некомплект', 'Излишествует'],
+                datasets: [{
+                    label: 'Тракторы',
+                    data: ['{{ result11.sum_need }}', '{{ result11.sum_available }}', '{{ result11.sum_shortage }}', '{{ result11.sum_excess }}'],
+                    backgroundColor: [
+                        'rgba(255, 15, 15)',
+                        'rgba(0, 200, 0)',
+                        'rgba(255, 255, 0)',
+                        'rgba(255, 174, 0)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 15, 15, 1)',
+                        'rgba(0, 200, 0, 1)',
+                        'rgba(255, 255, 0, 1)',
+                        'rgba(255, 174, 0, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    datalabels: {
+                        color: 'black'
+                    }
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">Прицепы грузовые</h5>
+          <canvas id="myChart12" width="445" height="400"></canvas>
+        <script>
+        const pricep_gruz = document.getElementById('myChart12').getContext('2d');
+        const myChart12 = new Chart(pricep_gruz, {
+            type: 'bar',
+            data: {
+                labels: ['Потребность', 'Имеется', 'Некомплект', 'Излишествует'],
+                datasets: [{
+                    label: 'Прицепы грузовые',
+                    data: ['{{ result12.sum_need }}', '{{ result12.sum_available }}', '{{ result12.sum_shortage }}', '{{ result12.sum_excess }}'],
+                    backgroundColor: [
+                        'rgba(255, 15, 15)',
+                        'rgba(0, 200, 0)',
+                        'rgba(255, 255, 0)',
+                        'rgba(255, 174, 0)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 15, 15, 1)',
+                        'rgba(0, 200, 0, 1)',
+                        'rgba(255, 255, 0, 1)',
+                        'rgba(255, 174, 0, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    datalabels: {
+                        color: 'black'
+                    }
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+
+        </div>
+      </div>
+      
+      <div class="content">
+        
+        <div class="att">
+          <h5 class="zagol_an">Снегоходы</h5>
+          <canvas id="myChart13" width="445" height="400"></canvas>
+          <script>
+          const snegohod = document.getElementById('myChart13').getContext('2d');
+          const myChart13 = new Chart(snegohod, {
+              type: 'bar',
+              data: {
+                  labels: ['Потребность', 'Имеется', 'Некомплект', 'Излишествует'],
+                  datasets: [{
+                      label: 'Снегоходы',
+                      data: ['{{ result13.sum_need }}', '{{ result13.sum_available }}', '{{ result13.sum_shortage }}', '{{ result13.sum_excess }}'],
+                      backgroundColor: [
+                          'rgba(255, 15, 15)',
+                          'rgba(0, 200, 0)',
+                          'rgba(255, 255, 0)',
+                          'rgba(255, 174, 0)',
+                          'rgba(153, 102, 255)',
+                          'rgba(255, 159, 64)'
+                      ],
+                      borderColor: [
+                          'rgba(255, 15, 15, 1)',
+                          'rgba(0, 200, 0, 1)',
+                          'rgba(255, 255, 0, 1)',
+                          'rgba(255, 174, 0, 1)',
+                          'rgba(153, 102, 255, 1)',
+                          'rgba(255, 159, 64, 1)'
+                      ],
+                      borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                      }
+                  }]
+              },
+              plugins: [ChartDataLabels],
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">Квадроциклы</h5>
+          <canvas id="myChart14" width="445" height="400"></canvas>
+          <script>
+          const kvadroc = document.getElementById('myChart14').getContext('2d');
+          const myChart14 = new Chart(kvadroc, {
+              type: 'bar',
+              data: {
+                  labels: ['Потребность', 'Имеется', 'Некомплект', 'Излишествует'],
+                  datasets: [{
+                      label: 'Квадроциклы',
+                      data: ['{{ result14.sum_need }}', '{{ result14.sum_available }}', '{{ result14.sum_shortage }}', '{{ result14.sum_excess }}'],
+                      backgroundColor: [
+                          'rgba(255, 15, 15)',
+                          'rgba(0, 200, 0)',
+                          'rgba(255, 255, 0)',
+                          'rgba(255, 174, 0)',
+                          'rgba(153, 102, 255)',
+                          'rgba(255, 159, 64)'
+                      ],
+                      borderColor: [
+                          'rgba(255, 15, 15, 1)',
+                          'rgba(0, 200, 0, 1)',
+                          'rgba(255, 255, 0, 1)',
+                          'rgba(255, 174, 0, 1)',
+                          'rgba(153, 102, 255, 1)',
+                          'rgba(255, 159, 64, 1)'
+                      ],
+                      borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                      }
+                  }]
+              },
+              plugins: [ChartDataLabels],
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">Гидроциклы</h5>
+          <canvas id="myChart15" width="445" height="400"></canvas>
+          <script>
+          const gidroc = document.getElementById('myChart15').getContext('2d');
+          const myChart15 = new Chart(gidroc, {
+              type: 'bar',
+              data: {
+                  labels: ['Потребность', 'Имеется', 'Некомплект', 'Излишествует'],
+                  datasets: [{
+                      label: 'Гидроциклы',
+                      data: ['{{ result15.sum_need }}', '{{ result15.sum_available }}', '{{ result15.sum_shortage }}', '{{ result15.sum_excess }}'],
+                      backgroundColor: [
+                          'rgba(255, 15, 15)',
+                          'rgba(0, 200, 0)',
+                          'rgba(255, 255, 0)',
+                          'rgba(255, 174, 0)',
+                          'rgba(153, 102, 255)',
+                          'rgba(255, 159, 64)'
+                      ],
+                      borderColor: [
+                          'rgba(255, 15, 15, 1)',
+                          'rgba(0, 200, 0, 1)',
+                          'rgba(255, 255, 0, 1)',
+                          'rgba(255, 174, 0, 1)',
+                          'rgba(153, 102, 255, 1)',
+                          'rgba(255, 159, 64, 1)'
+                      ],
+                      borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                      }
+                  }]
+              },
+              plugins: [ChartDataLabels],
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+
+        </div>
+      </div>
+
+      <div class="content">
+        
+        <div class="att">
+          <h5 class="zagol_an">Прицепы для снегоходов</h5>
+          <canvas id="myChart16" width="445" height="400"></canvas>
+          <script>
+          const pricep_snegohod = document.getElementById('myChart16').getContext('2d');
+          const myChart16 = new Chart(pricep_snegohod, {
+              type: 'bar',
+              data: {
+                  labels: ['Потребность', 'Имеется', 'Некомплект', 'Излишествует'],
+                  datasets: [{
+                      label: 'Прицепы для снегоходов',
+                      data: ['{{ result16.sum_need }}', '{{ result16.sum_available }}', '{{ result16.sum_shortage }}', '{{ result16.sum_excess }}'],
+                      backgroundColor: [
+                          'rgba(255, 15, 15)',
+                          'rgba(0, 200, 0)',
+                          'rgba(255, 255, 0)',
+                          'rgba(255, 174, 0)',
+                          'rgba(153, 102, 255)',
+                          'rgba(255, 159, 64)'
+                      ],
+                      borderColor: [
+                          'rgba(255, 15, 15, 1)',
+                          'rgba(0, 200, 0, 1)',
+                          'rgba(255, 255, 0, 1)',
+                          'rgba(255, 174, 0, 1)',
+                          'rgba(153, 102, 255, 1)',
+                          'rgba(255, 159, 64, 1)'
+                      ],
+                      borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                      }
+                  }]
+              },
+              plugins: [ChartDataLabels],
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">Прицепы для квадроциклов</h5>
+          <canvas id="myChart17" width="445" height="400"></canvas>
+          <script>
+          const pricep_kvadroc = document.getElementById('myChart17').getContext('2d');
+          const myChart17 = new Chart(pricep_kvadroc, {
+              type: 'bar',
+              data: {
+                  labels: ['Потребность', 'Имеется', 'Некомплект', 'Излишествует'],
+                  datasets: [{
+                      label: 'Прицепы для квадроциклов',
+                      data: ['{{ result17.sum_need }}', '{{ result17.sum_available }}', '{{ result17.sum_shortage }}', '{{ result17.sum_excess }}'],
+                      backgroundColor: [
+                          'rgba(255, 15, 15)',
+                          'rgba(0, 200, 0)',
+                          'rgba(255, 255, 0)',
+                          'rgba(255, 174, 0)',
+                          'rgba(153, 102, 255)',
+                          'rgba(255, 159, 64)'
+                      ],
+                      borderColor: [
+                          'rgba(255, 15, 15, 1)',
+                          'rgba(0, 200, 0, 1)',
+                          'rgba(255, 255, 0, 1)',
+                          'rgba(255, 174, 0, 1)',
+                          'rgba(153, 102, 255, 1)',
+                          'rgba(255, 159, 64, 1)'
+                      ],
+                      borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                      }
+                  }]
+              },
+              plugins: [ChartDataLabels],
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">Прицепы для гидроциклов</h5>
+          <canvas id="myChart18" width="445" height="400"></canvas>
+          <script>
+          const pricep_gidroc = document.getElementById('myChart18').getContext('2d');
+          const myChart18 = new Chart(pricep_gidroc, {
+              type: 'bar',
+              data: {
+                  labels: ['Потребность', 'Имеется', 'Некомплект', 'Излишествует'],
+                  datasets: [{
+                      label: 'Прицепы для гидроциклов',
+                      data: ['{{ result18.sum_need }}', '{{ result18.sum_available }}', '{{ result18.sum_shortage }}', '{{ result18.sum_excess }}'],
+                      backgroundColor: [
+                          'rgba(255, 15, 15)',
+                          'rgba(0, 200, 0)',
+                          'rgba(255, 255, 0)',
+                          'rgba(255, 174, 0)',
+                          'rgba(153, 102, 255)',
+                          'rgba(255, 159, 64)'
+                      ],
+                      borderColor: [
+                          'rgba(255, 15, 15, 1)',
+                          'rgba(0, 200, 0, 1)',
+                          'rgba(255, 255, 0, 1)',
+                          'rgba(255, 174, 0, 1)',
+                          'rgba(153, 102, 255, 1)',
+                          'rgba(255, 159, 64, 1)'
+                      ],
+                      borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                      }
+                  }]
+              },
+              plugins: [ChartDataLabels],
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+          
+        </div>
+      </div>
+      
+      <div class="content">
+        
+        <div class="att">
+          <h5 class="zagol_an">Пожарные автомобили</h5>
+          <canvas id="myChart19" width="445" height="400"></canvas>
+          <script>
+          const pozhar_avto = document.getElementById('myChart19').getContext('2d');
+          const myChart19 = new Chart(pozhar_avto, {
+              type: 'bar',
+              data: {
+                  labels: ['Потребность', 'Имеется', 'Некомплект', 'Излишествует'],
+                  datasets: [{
+                      label: 'Пожарные автомобили',
+                      data: ['{{ result19.sum_need }}', '{{ result19.sum_available }}', '{{ result19.sum_shortage }}', '{{ result19.sum_excess }}'],
+                      backgroundColor: [
+                          'rgba(255, 15, 15)',
+                          'rgba(0, 200, 0)',
+                          'rgba(255, 255, 0)',
+                          'rgba(255, 174, 0)',
+                          'rgba(153, 102, 255)',
+                          'rgba(255, 159, 64)'
+                      ],
+                      borderColor: [
+                          'rgba(255, 15, 15, 1)',
+                          'rgba(0, 200, 0, 1)',
+                          'rgba(255, 255, 0, 1)',
+                          'rgba(255, 174, 0, 1)',
+                          'rgba(153, 102, 255, 1)',
+                          'rgba(255, 159, 64, 1)'
+                      ],
+                      borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                      }
+                  }]
+              },
+              plugins: [ChartDataLabels],
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">АБШ РВиС</h5>
+          <canvas id="myChart20" width="445" height="400"></canvas>
+          <script>
+          const absh_rvis = document.getElementById('myChart20').getContext('2d');
+          const myChart20 = new Chart(absh_rvis, {
+              type: 'bar',
+              data: {
+                  labels: ['Потребность', 'Имеется', 'Некомплект', 'Излишествует'],
+                  datasets: [{
+                      label: 'АБШ РВиС',
+                      data: ['{{ result20.sum_need }}', '{{ result20.sum_available }}', '{{ result20.sum_shortage }}', '{{ result20.sum_excess }}'],
+                      backgroundColor: [
+                          'rgba(255, 15, 15)',
+                          'rgba(0, 200, 0)',
+                          'rgba(255, 255, 0)',
+                          'rgba(255, 174, 0)',
+                          'rgba(153, 102, 255)',
+                          'rgba(255, 159, 64)'
+                      ],
+                      borderColor: [
+                          'rgba(255, 15, 15, 1)',
+                          'rgba(0, 200, 0, 1)',
+                          'rgba(255, 255, 0, 1)',
+                          'rgba(255, 174, 0, 1)',
+                          'rgba(153, 102, 255, 1)',
+                          'rgba(255, 159, 64, 1)'
+                      ],
+                      borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                      }
+                  }]
+              },
+              plugins: [ChartDataLabels],
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">ГБШ РВиС</h5>
+          <canvas id="myChart21" width="445" height="400"></canvas>
+          <script>
+          const gbsh_rvis = document.getElementById('myChart21').getContext('2d');
+          const myChart21 = new Chart(gbsh_rvis, {
+              type: 'bar',
+              data: {
+                  labels: ['Потребность', 'Имеется', 'Некомплект', 'Излишествует'],
+                  datasets: [{
+                      label: 'ГБШ РВиС',
+                      data: ['{{ result21.sum_need }}', '{{ result21.sum_available }}', '{{ result21.sum_shortage }}', '{{ result21.sum_excess }}'],
+                      backgroundColor: [
+                          'rgba(255, 15, 15)',
+                          'rgba(0, 200, 0)',
+                          'rgba(255, 255, 0)',
+                          'rgba(255, 174, 0)',
+                          'rgba(153, 102, 255)',
+                          'rgba(255, 159, 64)'
+                      ],
+                      borderColor: [
+                          'rgba(255, 15, 15, 1)',
+                          'rgba(0, 200, 0, 1)',
+                          'rgba(255, 255, 0, 1)',
+                          'rgba(255, 174, 0, 1)',
+                          'rgba(153, 102, 255, 1)',
+                          'rgba(255, 159, 64, 1)'
+                      ],
+                      borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                      }
+                  }]
+              },
+              plugins: [ChartDataLabels],
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+
+        </div>
+      </div>
+      
+      <div class="content">
+      
+        <div class="att">
+          <h5 class="zagol_an">ТБШ РВиС</h5>
+          <canvas id="myChart22" width="445" height="400"></canvas>
+          <script>
+          const tbsh_rvis = document.getElementById('myChart22').getContext('2d');
+          const myChart22 = new Chart(tbsh_rvis, {
+              type: 'bar',
+              data: {
+                  labels: ['Потребность', 'Имеется', 'Некомплект', 'Излишествует'],
+                  datasets: [{
+                      label: 'ТБШ РВиС',
+                      data: ['{{ result22.sum_need }}', '{{ result22.sum_available }}', '{{ result22.sum_shortage }}', '{{ result22.sum_excess }}'],
+                      backgroundColor: [
+                          'rgba(255, 15, 15)',
+                          'rgba(0, 200, 0)',
+                          'rgba(255, 255, 0)',
+                          'rgba(255, 174, 0)',
+                          'rgba(153, 102, 255)',
+                          'rgba(255, 159, 64)'
+                      ],
+                      borderColor: [
+                          'rgba(255, 15, 15, 1)',
+                          'rgba(0, 200, 0, 1)',
+                          'rgba(255, 255, 0, 1)',
+                          'rgba(255, 174, 0, 1)',
+                          'rgba(153, 102, 255, 1)',
+                          'rgba(255, 159, 64, 1)'
+                      ],
+                      borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                      }
+                  }]
+              },
+              plugins: [ChartDataLabels],
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">ПБШ РВиС</h5>
+          <canvas id="myChart23" width="445" height="400"></canvas>
+          <script>
+          const pbsh_rvis = document.getElementById('myChart23').getContext('2d');
+          const myChart23 = new Chart(pbsh_rvis, {
+              type: 'bar',
+              data: {
+                  labels: ['Потребность', 'Имеется', 'Некомплект', 'Излишествует'],
+                  datasets: [{
+                      label: 'ПБШ РВиС',
+                      data: ['{{ result23.sum_need }}', '{{ result23.sum_available }}', '{{ result23.sum_shortage }}', '{{ result23.sum_excess }}'],
+                      backgroundColor: [
+                          'rgba(255, 15, 15)',
+                          'rgba(0, 200, 0)',
+                          'rgba(255, 255, 0)',
+                          'rgba(255, 174, 0)',
+                          'rgba(153, 102, 255)',
+                          'rgba(255, 159, 64)'
+                      ],
+                      borderColor: [
+                          'rgba(255, 15, 15, 1)',
+                          'rgba(0, 200, 0, 1)',
+                          'rgba(255, 255, 0, 1)',
+                          'rgba(255, 174, 0, 1)',
+                          'rgba(153, 102, 255, 1)',
+                          'rgba(255, 159, 64, 1)'
+                      ],
+                      borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                      }
+                  }]
+              },
+              plugins: [ChartDataLabels],
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">Автошасси</h5>
+          <canvas id="myChart24" width="445" height="400"></canvas>
+          <script>
+          const avtoshassi = document.getElementById('myChart24').getContext('2d');
+          const myChart24 = new Chart(avtoshassi, {
+              type: 'bar',
+              data: {
+                  labels: ['Потребность', 'Имеется', 'Некомплект', 'Излишествует'],
+                  datasets: [{
+                      label: 'Автошасси',
+                      data: ['{{ result24.sum_need }}', '{{ result24.sum_available }}', '{{ result24.sum_shortage }}', '{{ result24.sum_excess }}'],
+                      backgroundColor: [
+                          'rgba(255, 15, 15)',
+                          'rgba(0, 200, 0)',
+                          'rgba(255, 255, 0)',
+                          'rgba(255, 174, 0)',
+                          'rgba(153, 102, 255)',
+                          'rgba(255, 159, 64)'
+                      ],
+                      borderColor: [
+                          'rgba(255, 15, 15, 1)',
+                          'rgba(0, 200, 0, 1)',
+                          'rgba(255, 255, 0, 1)',
+                          'rgba(255, 174, 0, 1)',
+                          'rgba(153, 102, 255, 1)',
+                          'rgba(255, 159, 64, 1)'
+                      ],
+                      borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                      }
+                  }]
+              },
+              plugins: [ChartDataLabels],
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+
+        </div>
+      </div>
+
+
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+      <footer class="page-footer font-small blue vniz"> 
+
+        
+      
+      </footer>
+</body>
+</html>

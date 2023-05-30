@@ -1,0 +1,29 @@
+1. Разархивируйте zip файл в рабочий стол
+2. Скачать python по этой ссылке https://www.python.org/downloads/ нажимаете на Download  Python 3.10.6
+3. В пойске зайдите в 'командная строка'
+	вводите в поле:
+	cd Desktop
+	cd ROOT
+4. В том же командной строке добавляем команду: 
+	pip install asgiref==3.5.2
+	pip install Django==4.0.6
+	pip install django-admin-interface==0.19.1
+	pip install django-colorfield==0.7.2
+	pip install django-flat-responsive==2.0
+	pip install django-flat-theme==1.1.4
+	pip install django-jazzmin==2.5.0
+	pip install gunicorn==20.1.0
+	pip install mysqlclient==2.1.1
+	pip install numpy==1.22.3
+	pip install Pillow==9.2.0
+	pip install PyMySQL==1.0.2
+	pip install six==1.16.0
+	pip install sqlparse==0.4.2
+	pip install tzdata==2022.1
+
+5. В командной строке добавдобавляем команду: 
+	python manage.py runserver
+
+6. Логин и пароль от админки:
+	login: admin
+	password: admin12345

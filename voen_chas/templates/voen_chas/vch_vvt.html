@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISMTO</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'voen_chas\css\main.css' %}">
+</head>
+<body>
+    <header class="d-flex justify-content-center py-3 heade">
+        <svg class="bi me-2" width="80" height="32"><use xlink:href="#bootstrap"></use></svg>
+
+        <a  class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Coat_of_arms_military-of-kazakhstan.svg/1200px-Coat_of_arms_military-of-kazakhstan.svg.png" alt="" style="height: 70px; margin-right: 15px;">
+            <p class="text-warning" >Информационная система <br>учета состояния военной автомобильной техники</p>
+          </a>
+
+          <a href="{% url 'links' %}" class="bar">В/ч ссылки</a>
+          <a href="{% url 'admin:index' %}" class="bar">Объект АТ</a>
+
+
+          <!-- <button type="button" class="btn bar">АТТ</button>
+          <button type="button" class="btn bar">Обьекты ВВТ</button>
+          <button type="button" class="btn bar">Справочник</button>
+          <button type="button" class="btn bar">Отчеты</button> -->
+
+
+        <svg class="bi me-2" width="80" height="32"><use xlink:href="#bootstrap"></use></svg>
+      </header>
+
+
+      {% block zagol %}<h3 class="zagol">в/ч 85395</h1>{% endblock %}
+      <table class="table">
+            <h5 class="zagol_1">Текущий ремонт 7000 км - 8000 км</h5>
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Марка ВВТ</th>
+                <th scope="col">Воен рег номер</th>
+                <th scope="col">город</th>
+                <th scope="col">Групаа эксплуатации</th>
+                <th scope="col">Войсковая часть</th>
+                <th scope="col">.км осталось до рем</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for ObiektiVvt in ObiektiVvt %}
+              <tr>
+                <td>{{ ObiektiVvt.0 }}</td>
+                <td>{{ ObiektiVvt.1 }}</td>
+                <td>{{ ObiektiVvt.2 }}</td>
+                <td>{{ ObiektiVvt.3 }}</td>
+                <td>{{ ObiektiVvt.4 }}</td>
+                <td>{{ ObiektiVvt.5 }}</td>
+                <td>{{ ObiektiVvt.6 }}</td>
+                <td>{{ ObiektiVvt.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for legkov in legkov %}
+              <tr>
+                <td>{{ legkov.0 }}</td>
+                <td>{{ legkov.1 }}</td>
+                <td>{{ legkov.2 }}</td>
+                <td>{{ legkov.3 }}</td>
+                <td>{{ legkov.4 }}</td>
+                <td>{{ legkov.5 }}</td>
+                <td>{{ legkov.6 }}</td>
+                <td>{{ legkov.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for Bortov in Bortov %}
+              <tr>
+                <td>{{ Bortov.0 }}</td>
+                <td>{{ Bortov.1 }}</td>
+                <td>{{ Bortov.2 }}</td>
+                <td>{{ Bortov.3 }}</td>
+                <td>{{ Bortov.4 }}</td>
+                <td>{{ Bortov.5 }}</td>
+                <td>{{ Bortov.6 }}</td>
+                <td>{{ Bortov.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for avtoteg in avtoteg %}
+              <tr>
+                <td>{{ avtoteg.0 }}</td>
+                <td>{{ avtoteg.1 }}</td>
+                <td>{{ avtoteg.2 }}</td>
+                <td>{{ avtoteg.3 }}</td>
+                <td>{{ avtoteg.4 }}</td>
+                <td>{{ avtoteg.5 }}</td>
+                <td>{{ avtoteg.6 }}</td>
+                <td>{{ avtoteg.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for set_teg in set_teg %}
+              <tr>
+                <td>{{ set_teg.0 }}</td>
+                <td>{{ set_teg.1 }}</td>
+                <td>{{ set_teg.2 }}</td>
+                <td>{{ set_teg.3 }}</td>
+                <td>{{ set_teg.4 }}</td>
+                <td>{{ set_teg.5 }}</td>
+                <td>{{ set_teg.6 }}</td>
+                <td>{{ set_teg.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for trali in trali %}
+              <tr>
+                <td>{{ trali.0 }}</td>
+                <td>{{ trali.1 }}</td>
+                <td>{{ trali.2 }}</td>
+                <td>{{ trali.3 }}</td>
+                <td>{{ trali.4 }}</td>
+                <td>{{ trali.5 }}</td>
+                <td>{{ trali.6 }}</td>
+                <td>{{ trali.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for avtosamos in avtosamos %}
+              <tr>
+                <td>{{ avtosamos.0 }}</td>
+                <td>{{ avtosamos.1 }}</td>
+                <td>{{ avtosamos.2 }}</td>
+                <td>{{ avtosamos.3 }}</td>
+                <td>{{ avtosamos.4 }}</td>
+                <td>{{ avtosamos.5 }}</td>
+                <td>{{ avtosamos.6 }}</td>
+                <td>{{ avtosamos.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for avtofur in avtofur %}
+              <tr>
+                <td>{{ avtofur.0 }}</td>
+                <td>{{ avtofur.1 }}</td>
+                <td>{{ avtofur.2 }}</td>
+                <td>{{ avtofur.3 }}</td>
+                <td>{{ avtofur.4 }}</td>
+                <td>{{ avtofur.5 }}</td>
+                <td>{{ avtofur.6 }}</td>
+                <td>{{ avtofur.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for shtab in shtab %}
+              <tr>
+                <td>{{ shtab.0 }}</td>
+                <td>{{ shtab.1 }}</td>
+                <td>{{ shtab.2 }}</td>
+                <td>{{ shtab.3 }}</td>
+                <td>{{ shtab.4 }}</td>
+                <td>{{ shtab.5 }}</td>
+                <td>{{ shtab.6 }}</td>
+                <td>{{ shtab.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for sanit_avto in sanit_avto %}
+              <tr>
+                <td>{{ sanit_avto.0 }}</td>
+                <td>{{ sanit_avto.1 }}</td>
+                <td>{{ sanit_avto.2 }}</td>
+                <td>{{ sanit_avto.3 }}</td>
+                <td>{{ sanit_avto.4 }}</td>
+                <td>{{ sanit_avto.5 }}</td>
+                <td>{{ sanit_avto.6 }}</td>
+                <td>{{ sanit_avto.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for passazh_avto in passazh_avto %}
+              <tr>
+                <td>{{ passazh_avto.0 }}</td>
+                <td>{{ passazh_avto.1 }}</td>
+                <td>{{ passazh_avto.2 }}</td>
+                <td>{{ passazh_avto.3 }}</td>
+                <td>{{ passazh_avto.4 }}</td>
+                <td>{{ passazh_avto.5 }}</td>
+                <td>{{ passazh_avto.6 }}</td>
+                <td>{{ passazh_avto.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for mto in mto %}
+              <tr>
+                <td>{{ mto.0 }}</td>
+                <td>{{ mto.1 }}</td>
+                <td>{{ mto.2 }}</td>
+                <td>{{ mto.3 }}</td>
+                <td>{{ mto.4 }}</td>
+                <td>{{ mto.5 }}</td>
+                <td>{{ mto.6 }}</td>
+                <td>{{ mto.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for upm in upm %}
+              <tr>
+                <td>{{ upm.0 }}</td>
+                <td>{{ upm.1 }}</td>
+                <td>{{ upm.2 }}</td>
+                <td>{{ upm.3 }}</td>
+                <td>{{ upm.4 }}</td>
+                <td>{{ upm.5 }}</td>
+                <td>{{ upm.6 }}</td>
+                <td>{{ upm.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for parm in parm %}
+              <tr>
+                <td>{{ parm.0 }}</td>
+                <td>{{ parm.1 }}</td>
+                <td>{{ parm.2 }}</td>
+                <td>{{ parm.3 }}</td>
+                <td>{{ parm.4 }}</td>
+                <td>{{ parm.5 }}</td>
+                <td>{{ parm.6 }}</td>
+                <td>{{ parm.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for koles_eva in koles_eva %}
+              <tr>
+                <td>{{ koles_eva.0 }}</td>
+                <td>{{ koles_eva.1 }}</td>
+                <td>{{ koles_eva.2 }}</td>
+                <td>{{ koles_eva.3 }}</td>
+                <td>{{ koles_eva.4 }}</td>
+                <td>{{ koles_eva.5 }}</td>
+                <td>{{ koles_eva.6 }}</td>
+                <td>{{ koles_eva.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for avtoshassi in avtoshassi %}
+              <tr>
+                <td>{{ avtoshassi.0 }}</td>
+                <td>{{ avtoshassi.1 }}</td>
+                <td>{{ avtoshassi.2 }}</td>
+                <td>{{ avtoshassi.3 }}</td>
+                <td>{{ avtoshassi.4 }}</td>
+                <td>{{ avtoshassi.5 }}</td>
+                <td>{{ avtoshassi.6 }}</td>
+                <td>{{ avtoshassi.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for snegohod in snegohod %}
+              <tr>
+                <td>{{ snegohod.0 }}</td>
+                <td>{{ snegohod.1 }}</td>
+                <td>{{ snegohod.2 }}</td>
+                <td>{{ snegohod.3 }}</td>
+                <td>{{ snegohod.4 }}</td>
+                <td>{{ snegohod.5 }}</td>
+                <td>{{ snegohod.6 }}</td>
+                <td>{{ snegohod.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for Pricep_snegohod in Pricep_snegohod %}
+              <tr>
+                <td>{{ Pricep_snegohod.0 }}</td>
+                <td>{{ Pricep_snegohod.1 }}</td>
+                <td>{{ Pricep_snegohod.2 }}</td>
+                <td>{{ Pricep_snegohod.3 }}</td>
+                <td>{{ Pricep_snegohod.4 }}</td>
+                <td>{{ Pricep_snegohod.5 }}</td>
+                <td>{{ Pricep_snegohod.6 }}</td>
+                <td>{{ Pricep_snegohod.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for kvadroc in kvadroc %}
+              <tr>
+                <td>{{ kvadroc.0 }}</td>
+                <td>{{ kvadroc.1 }}</td>
+                <td>{{ kvadroc.2 }}</td>
+                <td>{{ kvadroc.3 }}</td>
+                <td>{{ kvadroc.4 }}</td>
+                <td>{{ kvadroc.5 }}</td>
+                <td>{{ kvadroc.6 }}</td>
+                <td>{{ kvadroc.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for Pricep_kvadroc in Pricep_kvadroc %}
+              <tr>
+                <td>{{ Pricep_kvadroc.0 }}</td>
+                <td>{{ Pricep_kvadroc.1 }}</td>
+                <td>{{ Pricep_kvadroc.2 }}</td>
+                <td>{{ Pricep_kvadroc.3 }}</td>
+                <td>{{ Pricep_kvadroc.4 }}</td>
+                <td>{{ Pricep_kvadroc.5 }}</td>
+                <td>{{ Pricep_kvadroc.6 }}</td>
+                <td>{{ Pricep_kvadroc.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for gidroc in gidroc %}
+              <tr>
+                <td>{{ gidroc.0 }}</td>
+                <td>{{ gidroc.1 }}</td>
+                <td>{{ gidroc.2 }}</td>
+                <td>{{ gidroc.3 }}</td>
+                <td>{{ gidroc.4 }}</td>
+                <td>{{ gidroc.5 }}</td>
+                <td>{{ gidroc.6 }}</td>
+                <td>{{ gidroc.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for Pricep_gidroc in Pricep_gidroc %}
+              <tr>
+                <td>{{ Pricep_gidroc.0 }}</td>
+                <td>{{ Pricep_gidroc.1 }}</td>
+                <td>{{ Pricep_gidroc.2 }}</td>
+                <td>{{ Pricep_gidroc.3 }}</td>
+                <td>{{ Pricep_gidroc.4 }}</td>
+                <td>{{ Pricep_gidroc.5 }}</td>
+                <td>{{ Pricep_gidroc.6 }}</td>
+                <td>{{ Pricep_gidroc.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for gus_tag in gus_tag %}
+              <tr>
+                <td>{{ gus_tag.0 }}</td>
+                <td>{{ gus_tag.1 }}</td>
+                <td>{{ gus_tag.2 }}</td>
+                <td>{{ gus_tag.3 }}</td>
+                <td>{{ gus_tag.4 }}</td>
+                <td>{{ gus_tag.5 }}</td>
+                <td>{{ gus_tag.6 }}</td>
+                <td>{{ gus_tag.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for traktor in traktor %}
+              <tr>
+                <td>{{ traktor.0 }}</td>
+                <td>{{ traktor.1 }}</td>
+                <td>{{ traktor.2 }}</td>
+                <td>{{ traktor.3 }}</td>
+                <td>{{ traktor.4 }}</td>
+                <td>{{ traktor.5 }}</td>
+                <td>{{ traktor.6 }}</td>
+                <td>{{ traktor.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for odnos in odnos %}
+              <tr>
+                <td>{{ odnos.0 }}</td>
+                <td>{{ odnos.1 }}</td>
+                <td>{{ odnos.2 }}</td>
+                <td>{{ odnos.3 }}</td>
+                <td>{{ odnos.4 }}</td>
+                <td>{{ odnos.5 }}</td>
+                <td>{{ odnos.6 }}</td>
+                <td>{{ odnos.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for dvuhos in dvuhos %}
+              <tr>
+                <td>{{ dvuhos.0 }}</td>
+                <td>{{ dvuhos.1 }}</td>
+                <td>{{ dvuhos.2 }}</td>
+                <td>{{ dvuhos.3 }}</td>
+                <td>{{ dvuhos.4 }}</td>
+                <td>{{ dvuhos.5 }}</td>
+                <td>{{ dvuhos.6 }}</td>
+                <td>{{ dvuhos.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for tazhelvoz in tazhelvoz %}
+              <tr>
+                <td>{{ tazhelvoz.0 }}</td>
+                <td>{{ tazhelvoz.1 }}</td>
+                <td>{{ tazhelvoz.2 }}</td>
+                <td>{{ tazhelvoz.3 }}</td>
+                <td>{{ tazhelvoz.4 }}</td>
+                <td>{{ tazhelvoz.5 }}</td>
+                <td>{{ tazhelvoz.6 }}</td>
+                <td>{{ tazhelvoz.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for pozhar_avto in pozhar_avto %}
+              <tr>
+                <td>{{ pozhar_avto.0 }}</td>
+                <td>{{ pozhar_avto.1 }}</td>
+                <td>{{ pozhar_avto.2 }}</td>
+                <td>{{ pozhar_avto.3 }}</td>
+                <td>{{ pozhar_avto.4 }}</td>
+                <td>{{ pozhar_avto.5 }}</td>
+                <td>{{ pozhar_avto.6 }}</td>
+                <td>{{ pozhar_avto.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for koles_spec_shassi in koles_spec_shassi %}
+              <tr>
+                <td>{{ koles_spec_shassi.0 }}</td>
+                <td>{{ koles_spec_shassi.1 }}</td>
+                <td>{{ koles_spec_shassi.2 }}</td>
+                <td>{{ koles_spec_shassi.3 }}</td>
+                <td>{{ koles_spec_shassi.4 }}</td>
+                <td>{{ koles_spec_shassi.5 }}</td>
+                <td>{{ koles_spec_shassi.6 }}</td>
+                <td>{{ koles_spec_shassi.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for set_avto_vvt in set_avto_vvt %}
+              <tr>
+                <td>{{ set_avto_vvt.0 }}</td>
+                <td>{{ set_avto_vvt.1 }}</td>
+                <td>{{ set_avto_vvt.2 }}</td>
+                <td>{{ set_avto_vvt.3 }}</td>
+                <td>{{ set_avto_vvt.4 }}</td>
+                <td>{{ set_avto_vvt.5 }}</td>
+                <td>{{ set_avto_vvt.6 }}</td>
+                <td>{{ set_avto_vvt.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for GBSH_rvis in GBSH_rvis %}
+              <tr>
+                <td>{{ GBSH_rvis.0 }}</td>
+                <td>{{ GBSH_rvis.1 }}</td>
+                <td>{{ GBSH_rvis.2 }}</td>
+                <td>{{ GBSH_rvis.3 }}</td>
+                <td>{{ GBSH_rvis.4 }}</td>
+                <td>{{ GBSH_rvis.5 }}</td>
+                <td>{{ GBSH_rvis.6 }}</td>
+                <td>{{ GBSH_rvis.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for TBSH_rvis in TBSH_rvis %}
+              <tr>
+                <td>{{ TBSH_rvis.0 }}</td>
+                <td>{{ TBSH_rvis.1 }}</td>
+                <td>{{ TBSH_rvis.2 }}</td>
+                <td>{{ TBSH_rvis.3 }}</td>
+                <td>{{ TBSH_rvis.4 }}</td>
+                <td>{{ TBSH_rvis.5 }}</td>
+                <td>{{ TBSH_rvis.6 }}</td>
+                <td>{{ TBSH_rvis.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for odnos_pbsh in odnos_pbsh %}
+              <tr>
+                <td>{{ odnos_pbsh.0 }}</td>
+                <td>{{ odnos_pbsh.1 }}</td>
+                <td>{{ odnos_pbsh.2 }}</td>
+                <td>{{ odnos_pbsh.3 }}</td>
+                <td>{{ odnos_pbsh.4 }}</td>
+                <td>{{ odnos_pbsh.5 }}</td>
+                <td>{{ odnos_pbsh.6 }}</td>
+                <td>{{ odnos_pbsh.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for dvuhos_pbsh in dvuhos_pbsh %}
+              <tr>
+                <td>{{ dvuhos_pbsh.0 }}</td>
+                <td>{{ dvuhos_pbsh.1 }}</td>
+                <td>{{ dvuhos_pbsh.2 }}</td>
+                <td>{{ dvuhos_pbsh.3 }}</td>
+                <td>{{ dvuhos_pbsh.4 }}</td>
+                <td>{{ dvuhos_pbsh.5 }}</td>
+                <td>{{ dvuhos_pbsh.6 }}</td>
+                <td>{{ dvuhos_pbsh.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for tazhelvoz_pbsh in tazhelvoz_pbsh %}
+              <tr>
+                <td>{{ tazhelvoz_pbsh.0 }}</td>
+                <td>{{ tazhelvoz_pbsh.1 }}</td>
+                <td>{{ tazhelvoz_pbsh.2 }}</td>
+                <td>{{ tazhelvoz_pbsh.3 }}</td>
+                <td>{{ tazhelvoz_pbsh.4 }}</td>
+                <td>{{ tazhelvoz_pbsh.5 }}</td>
+                <td>{{ tazhelvoz_pbsh.6 }}</td>
+                <td>{{ tazhelvoz_pbsh.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <hr class="hor_l">
+
+
+
+          <table class="table">
+            <h5 class="zagol_1">Средний ремонт 70000 км - 77760 км</h5>
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Марка ВВТ</th>
+                <th scope="col">Воен рег номер</th>
+                <th scope="col">город</th>
+                <th scope="col">Групаа эксплуатации</th>
+                <th scope="col">Войсковая часть</th>
+                <th scope="col">.км осталось до рем</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for ObiektiVvt2 in ObiektiVvt2 %}
+              <tr>
+                <td>{{ ObiektiVvt2.0 }}</td>
+                <td>{{ ObiektiVvt2.1 }}</td>
+                <td>{{ ObiektiVvt2.2 }}</td>
+                <td>{{ ObiektiVvt2.3 }}</td>
+                <td>{{ ObiektiVvt2.4 }}</td>
+                <td>{{ ObiektiVvt2.5 }}</td>
+                <td>{{ ObiektiVvt2.6 }}</td>
+                <td>{{ ObiektiVvt2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for legkov2 in legkov2 %}
+              <tr>
+                <td>{{ legkov2.0 }}</td>
+                <td>{{ legkov2.1 }}</td>
+                <td>{{ legkov2.2 }}</td>
+                <td>{{ legkov2.3 }}</td>
+                <td>{{ legkov2.4 }}</td>
+                <td>{{ legkov2.5 }}</td>
+                <td>{{ legkov2.6 }}</td>
+                <td>{{ legkov2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for Bortov2 in Bortov2 %}
+              <tr>
+                <td>{{ Bortov2.0 }}</td>
+                <td>{{ Bortov2.1 }}</td>
+                <td>{{ Bortov2.2 }}</td>
+                <td>{{ Bortov2.3 }}</td>
+                <td>{{ Bortov2.4 }}</td>
+                <td>{{ Bortov2.5 }}</td>
+                <td>{{ Bortov2.6 }}</td>
+                <td>{{ Bortov2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for avtoteg2 in avtoteg2 %}
+              <tr>
+                <td>{{ avtoteg2.0 }}</td>
+                <td>{{ avtoteg2.1 }}</td>
+                <td>{{ avtoteg2.2 }}</td>
+                <td>{{ avtoteg2.3 }}</td>
+                <td>{{ avtoteg2.4 }}</td>
+                <td>{{ avtoteg2.5 }}</td>
+                <td>{{ avtoteg2.6 }}</td>
+                <td>{{ avtoteg2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for set_teg2 in set_teg2 %}
+              <tr>
+                <td>{{ set_teg2.0 }}</td>
+                <td>{{ set_teg2.1 }}</td>
+                <td>{{ set_teg2.2 }}</td>
+                <td>{{ set_teg2.3 }}</td>
+                <td>{{ set_teg2.4 }}</td>
+                <td>{{ set_teg2.5 }}</td>
+                <td>{{ set_teg2.6 }}</td>
+                <td>{{ set_teg2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for trali2 in trali2 %}
+              <tr>
+                <td>{{ trali2.0 }}</td>
+                <td>{{ trali2.1 }}</td>
+                <td>{{ trali2.2 }}</td>
+                <td>{{ trali2.3 }}</td>
+                <td>{{ trali2.4 }}</td>
+                <td>{{ trali2.5 }}</td>
+                <td>{{ trali2.6 }}</td>
+                <td>{{ trali2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for avtosamos2 in avtosamos2 %}
+              <tr>
+                <td>{{ avtosamos2.0 }}</td>
+                <td>{{ avtosamos2.1 }}</td>
+                <td>{{ avtosamos2.2 }}</td>
+                <td>{{ avtosamos2.3 }}</td>
+                <td>{{ avtosamos2.4 }}</td>
+                <td>{{ avtosamos2.5 }}</td>
+                <td>{{ avtosamos2.6 }}</td>
+                <td>{{ avtosamos2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for avtofur2 in avtofur2 %}
+              <tr>
+                <td>{{ avtofur2.0 }}</td>
+                <td>{{ avtofur2.1 }}</td>
+                <td>{{ avtofur2.2 }}</td>
+                <td>{{ avtofur2.3 }}</td>
+                <td>{{ avtofur2.4 }}</td>
+                <td>{{ avtofur2.5 }}</td>
+                <td>{{ avtofur2.6 }}</td>
+                <td>{{ avtofur2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for shtab2 in shtab2 %}
+              <tr>
+                <td>{{ shtab2.0 }}</td>
+                <td>{{ shtab2.1 }}</td>
+                <td>{{ shtab2.2 }}</td>
+                <td>{{ shtab2.3 }}</td>
+                <td>{{ shtab2.4 }}</td>
+                <td>{{ shtab2.5 }}</td>
+                <td>{{ shtab2.6 }}</td>
+                <td>{{ shtab2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for sanit_avto2 in sanit_avto2 %}
+              <tr>
+                <td>{{ sanit_avto2.0 }}</td>
+                <td>{{ sanit_avto2.1 }}</td>
+                <td>{{ sanit_avto2.2 }}</td>
+                <td>{{ sanit_avto2.3 }}</td>
+                <td>{{ sanit_avto2.4 }}</td>
+                <td>{{ sanit_avto2.5 }}</td>
+                <td>{{ sanit_avto2.6 }}</td>
+                <td>{{ sanit_avto2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for passazh_avto2 in passazh_avto2 %}
+              <tr>
+                <td>{{ passazh_avto2.0 }}</td>
+                <td>{{ passazh_avto2.1 }}</td>
+                <td>{{ passazh_avto2.2 }}</td>
+                <td>{{ passazh_avto2.3 }}</td>
+                <td>{{ passazh_avto2.4 }}</td>
+                <td>{{ passazh_avto2.5 }}</td>
+                <td>{{ passazh_avto2.6 }}</td>
+                <td>{{ passazh_avto2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for mto2 in mto2 %}
+              <tr>
+                <td>{{ mto2.0 }}</td>
+                <td>{{ mto2.1 }}</td>
+                <td>{{ mto2.2 }}</td>
+                <td>{{ mto2.3 }}</td>
+                <td>{{ mto2.4 }}</td>
+                <td>{{ mto2.5 }}</td>
+                <td>{{ mto2.6 }}</td>
+                <td>{{ mto2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for upm2 in upm2 %}
+              <tr>
+                <td>{{ upm2.0 }}</td>
+                <td>{{ upm2.1 }}</td>
+                <td>{{ upm2.2 }}</td>
+                <td>{{ upm2.3 }}</td>
+                <td>{{ upm2.4 }}</td>
+                <td>{{ upm2.5 }}</td>
+                <td>{{ upm2.6 }}</td>
+                <td>{{ upm2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for parm2 in parm2 %}
+              <tr>
+                <td>{{ parm2.0 }}</td>
+                <td>{{ parm2.1 }}</td>
+                <td>{{ parm2.2 }}</td>
+                <td>{{ parm2.3 }}</td>
+                <td>{{ parm2.4 }}</td>
+                <td>{{ parm2.5 }}</td>
+                <td>{{ parm2.6 }}</td>
+                <td>{{ parm2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for koles_eva2 in koles_eva2 %}
+              <tr>
+                <td>{{ koles_eva2.0 }}</td>
+                <td>{{ koles_eva2.1 }}</td>
+                <td>{{ koles_eva2.2 }}</td>
+                <td>{{ koles_eva2.3 }}</td>
+                <td>{{ koles_eva2.4 }}</td>
+                <td>{{ koles_eva2.5 }}</td>
+                <td>{{ koles_eva2.6 }}</td>
+                <td>{{ koles_eva2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for avtoshassi2 in avtoshassi2 %}
+              <tr>
+                <td>{{ avtoshassi2.0 }}</td>
+                <td>{{ avtoshassi2.1 }}</td>
+                <td>{{ avtoshassi2.2 }}</td>
+                <td>{{ avtoshassi2.3 }}</td>
+                <td>{{ avtoshassi2.4 }}</td>
+                <td>{{ avtoshassi2.5 }}</td>
+                <td>{{ avtoshassi2.6 }}</td>
+                <td>{{ avtoshassi2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for snegohod2 in snegohod2 %}
+              <tr>
+                <td>{{ snegohod2.0 }}</td>
+                <td>{{ snegohod2.1 }}</td>
+                <td>{{ snegohod2.2 }}</td>
+                <td>{{ snegohod2.3 }}</td>
+                <td>{{ snegohod2.4 }}</td>
+                <td>{{ snegohod2.5 }}</td>
+                <td>{{ snegohod2.6 }}</td>
+                <td>{{ snegohod2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for Pricep_snegohod2 in Pricep_snegohod2 %}
+              <tr>
+                <td>{{ Pricep_snegohod2.0 }}</td>
+                <td>{{ Pricep_snegohod2.1 }}</td>
+                <td>{{ Pricep_snegohod2.2 }}</td>
+                <td>{{ Pricep_snegohod2.3 }}</td>
+                <td>{{ Pricep_snegohod2.4 }}</td>
+                <td>{{ Pricep_snegohod2.5 }}</td>
+                <td>{{ Pricep_snegohod2.6 }}</td>
+                <td>{{ Pricep_snegohod2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for kvadroc2 in kvadroc2 %}
+              <tr>
+                <td>{{ kvadroc2.0 }}</td>
+                <td>{{ kvadroc2.1 }}</td>
+                <td>{{ kvadroc2.2 }}</td>
+                <td>{{ kvadroc2.3 }}</td>
+                <td>{{ kvadroc2.4 }}</td>
+                <td>{{ kvadroc2.5 }}</td>
+                <td>{{ kvadroc2.6 }}</td>
+                <td>{{ kvadroc2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for Pricep_kvadroc2 in Pricep_kvadroc2 %}
+              <tr>
+                <td>{{ Pricep_kvadroc2.0 }}</td>
+                <td>{{ Pricep_kvadroc2.1 }}</td>
+                <td>{{ Pricep_kvadroc2.2 }}</td>
+                <td>{{ Pricep_kvadroc2.3 }}</td>
+                <td>{{ Pricep_kvadroc2.4 }}</td>
+                <td>{{ Pricep_kvadroc2.5 }}</td>
+                <td>{{ Pricep_kvadroc2.6 }}</td>
+                <td>{{ Pricep_kvadroc2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for gidroc2 in gidroc2 %}
+              <tr>
+                <td>{{ gidroc2.0 }}</td>
+                <td>{{ gidroc2.1 }}</td>
+                <td>{{ gidroc2.2 }}</td>
+                <td>{{ gidroc2.3 }}</td>
+                <td>{{ gidroc2.4 }}</td>
+                <td>{{ gidroc2.5 }}</td>
+                <td>{{ gidroc2.6 }}</td>
+                <td>{{ gidroc2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for Pricep_gidroc2 in Pricep_gidroc2 %}
+              <tr>
+                <td>{{ Pricep_gidroc2.0 }}</td>
+                <td>{{ Pricep_gidroc2.1 }}</td>
+                <td>{{ Pricep_gidroc2.2 }}</td>
+                <td>{{ Pricep_gidroc2.3 }}</td>
+                <td>{{ Pricep_gidroc2.4 }}</td>
+                <td>{{ Pricep_gidroc2.5 }}</td>
+                <td>{{ Pricep_gidroc2.6 }}</td>
+                <td>{{ Pricep_gidroc2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for gus_tag2 in gus_tag2 %}
+              <tr>
+                <td>{{ gus_tag2.0 }}</td>
+                <td>{{ gus_tag2.1 }}</td>
+                <td>{{ gus_tag2.2 }}</td>
+                <td>{{ gus_tag2.3 }}</td>
+                <td>{{ gus_tag2.4 }}</td>
+                <td>{{ gus_tag2.5 }}</td>
+                <td>{{ gus_tag2.6 }}</td>
+                <td>{{ gus_tag2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for traktor2 in traktor2 %}
+              <tr>
+                <td>{{ traktor2.0 }}</td>
+                <td>{{ traktor2.1 }}</td>
+                <td>{{ traktor2.2 }}</td>
+                <td>{{ traktor2.3 }}</td>
+                <td>{{ traktor2.4 }}</td>
+                <td>{{ traktor2.5 }}</td>
+                <td>{{ traktor2.6 }}</td>
+                <td>{{ traktor2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for odnos2 in odnos2 %}
+              <tr>
+                <td>{{ odnos2.0 }}</td>
+                <td>{{ odnos2.1 }}</td>
+                <td>{{ odnos2.2 }}</td>
+                <td>{{ odnos2.3 }}</td>
+                <td>{{ odnos2.4 }}</td>
+                <td>{{ odnos2.5 }}</td>
+                <td>{{ odnos2.6 }}</td>
+                <td>{{ odnos2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for dvuhos2 in dvuhos2 %}
+              <tr>
+                <td>{{ dvuhos2.0 }}</td>
+                <td>{{ dvuhos2.1 }}</td>
+                <td>{{ dvuhos2.2 }}</td>
+                <td>{{ dvuhos2.3 }}</td>
+                <td>{{ dvuhos2.4 }}</td>
+                <td>{{ dvuhos2.5 }}</td>
+                <td>{{ dvuhos2.6 }}</td>
+                <td>{{ dvuhos2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for tazhelvoz2 in tazhelvoz2 %}
+              <tr>
+                <td>{{ tazhelvoz2.0 }}</td>
+                <td>{{ tazhelvoz2.1 }}</td>
+                <td>{{ tazhelvoz2.2 }}</td>
+                <td>{{ tazhelvoz2.3 }}</td>
+                <td>{{ tazhelvoz2.4 }}</td>
+                <td>{{ tazhelvoz2.5 }}</td>
+                <td>{{ tazhelvoz2.6 }}</td>
+                <td>{{ tazhelvoz2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for pozhar_avto2 in pozhar_avto2 %}
+              <tr>
+                <td>{{ pozhar_avto2.0 }}</td>
+                <td>{{ pozhar_avto2.1 }}</td>
+                <td>{{ pozhar_avto2.2 }}</td>
+                <td>{{ pozhar_avto2.3 }}</td>
+                <td>{{ pozhar_avto2.4 }}</td>
+                <td>{{ pozhar_avto2.5 }}</td>
+                <td>{{ pozhar_avto2.6 }}</td>
+                <td>{{ pozhar_avto2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for koles_spec_shassi2 in koles_spec_shassi2 %}
+              <tr>
+                <td>{{ koles_spec_shassi2.0 }}</td>
+                <td>{{ koles_spec_shassi2.1 }}</td>
+                <td>{{ koles_spec_shassi2.2 }}</td>
+                <td>{{ koles_spec_shassi2.3 }}</td>
+                <td>{{ koles_spec_shassi2.4 }}</td>
+                <td>{{ koles_spec_shassi2.5 }}</td>
+                <td>{{ koles_spec_shassi2.6 }}</td>
+                <td>{{ koles_spec_shassi2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for set_avto_vvt2 in set_avto_vvt2 %}
+              <tr>
+                <td>{{ set_avto_vvt2.0 }}</td>
+                <td>{{ set_avto_vvt2.1 }}</td>
+                <td>{{ set_avto_vvt2.2 }}</td>
+                <td>{{ set_avto_vvt2.3 }}</td>
+                <td>{{ set_avto_vvt2.4 }}</td>
+                <td>{{ set_avto_vvt2.5 }}</td>
+                <td>{{ set_avto_vvt2.6 }}</td>
+                <td>{{ set_avto_vvt2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for GBSH_rvis2 in GBSH_rvis2 %}
+              <tr>
+                <td>{{ GBSH_rvis2.0 }}</td>
+                <td>{{ GBSH_rvis2.1 }}</td>
+                <td>{{ GBSH_rvis2.2 }}</td>
+                <td>{{ GBSH_rvis2.3 }}</td>
+                <td>{{ GBSH_rvis2.4 }}</td>
+                <td>{{ GBSH_rvis2.5 }}</td>
+                <td>{{ GBSH_rvis2.6 }}</td>
+                <td>{{ GBSH_rvis2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for TBSH_rvis2 in TBSH_rvis2 %}
+              <tr>
+                <td>{{ TBSH_rvis2.0 }}</td>
+                <td>{{ TBSH_rvis2.1 }}</td>
+                <td>{{ TBSH_rvis2.2 }}</td>
+                <td>{{ TBSH_rvis2.3 }}</td>
+                <td>{{ TBSH_rvis2.4 }}</td>
+                <td>{{ TBSH_rvis2.5 }}</td>
+                <td>{{ TBSH_rvis2.6 }}</td>
+                <td>{{ TBSH_rvis2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for odnos_pbsh2 in odnos_pbsh2 %}
+              <tr>
+                <td>{{ odnos_pbsh2.0 }}</td>
+                <td>{{ odnos_pbsh2.1 }}</td>
+                <td>{{ odnos_pbsh2.2 }}</td>
+                <td>{{ odnos_pbsh2.3 }}</td>
+                <td>{{ odnos_pbsh2.4 }}</td>
+                <td>{{ odnos_pbsh2.5 }}</td>
+                <td>{{ odnos_pbsh2.6 }}</td>
+                <td>{{ odnos_pbsh2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for dvuhos_pbsh2 in dvuhos_pbsh2 %}
+              <tr>
+                <td>{{ dvuhos_pbsh2.0 }}</td>
+                <td>{{ dvuhos_pbsh2.1 }}</td>
+                <td>{{ dvuhos_pbsh2.2 }}</td>
+                <td>{{ dvuhos_pbsh2.3 }}</td>
+                <td>{{ dvuhos_pbsh2.4 }}</td>
+                <td>{{ dvuhos_pbsh2.5 }}</td>
+                <td>{{ dvuhos_pbsh2.6 }}</td>
+                <td>{{ dvuhos_pbsh2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for tazhelvoz_pbsh2 in tazhelvoz_pbsh2 %}
+              <tr>
+                <td>{{ tazhelvoz_pbsh2.0 }}</td>
+                <td>{{ tazhelvoz_pbsh2.1 }}</td>
+                <td>{{ tazhelvoz_pbsh2.2 }}</td>
+                <td>{{ tazhelvoz_pbsh2.3 }}</td>
+                <td>{{ tazhelvoz_pbsh2.4 }}</td>
+                <td>{{ tazhelvoz_pbsh2.5 }}</td>
+                <td>{{ tazhelvoz_pbsh2.6 }}</td>
+                <td>{{ tazhelvoz_pbsh2.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <hr class="hor_l">
+
+
+          <table class="table">
+            <h5 class="zagol_1">Капитальный ремонт 110000 км - 129600 км, 10*</h5>
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Марка ВВТ</th>
+                <th scope="col">Воен рег номер</th>
+                <th scope="col">город</th>
+                <th scope="col">Групаа эксплуатации</th>
+                <th scope="col">Войсковая часть</th>
+                <th scope="col">.км осталось до рем</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for ObiektiVvt3 in ObiektiVvt3 %}
+              <tr>
+                <td>{{ ObiektiVvt3.0 }}</td>
+                <td>{{ ObiektiVvt3.1 }}</td>
+                <td>{{ ObiektiVvt3.2 }}</td>
+                <td>{{ ObiektiVvt3.3 }}</td>
+                <td>{{ ObiektiVvt3.4 }}</td>
+                <td>{{ ObiektiVvt3.5 }}</td>
+                <td>{{ ObiektiVvt3.6 }}</td>
+                <td>{{ ObiektiVvt3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for legkov3 in legkov3 %}
+              <tr>
+                <td>{{ legkov3.0 }}</td>
+                <td>{{ legkov3.1 }}</td>
+                <td>{{ legkov3.2 }}</td>
+                <td>{{ legkov3.3 }}</td>
+                <td>{{ legkov3.4 }}</td>
+                <td>{{ legkov3.5 }}</td>
+                <td>{{ legkov3.6 }}</td>
+                <td>{{ legkov3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for Bortov3 in Bortov3 %}
+              <tr>
+                <td>{{ Bortov3.0 }}</td>
+                <td>{{ Bortov3.1 }}</td>
+                <td>{{ Bortov3.2 }}</td>
+                <td>{{ Bortov3.3 }}</td>
+                <td>{{ Bortov3.4 }}</td>
+                <td>{{ Bortov3.5 }}</td>
+                <td>{{ Bortov3.6 }}</td>
+                <td>{{ Bortov3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for avtoteg3 in avtoteg3 %}
+              <tr>
+                <td>{{ avtoteg3.0 }}</td>
+                <td>{{ avtoteg3.1 }}</td>
+                <td>{{ avtoteg3.2 }}</td>
+                <td>{{ avtoteg3.3 }}</td>
+                <td>{{ avtoteg3.4 }}</td>
+                <td>{{ avtoteg3.5 }}</td>
+                <td>{{ avtoteg3.6 }}</td>
+                <td>{{ avtoteg3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for set_teg3 in set_teg3 %}
+              <tr>
+                <td>{{ set_teg3.0 }}</td>
+                <td>{{ set_teg3.1 }}</td>
+                <td>{{ set_teg3.2 }}</td>
+                <td>{{ set_teg3.3 }}</td>
+                <td>{{ set_teg3.4 }}</td>
+                <td>{{ set_teg3.5 }}</td>
+                <td>{{ set_teg3.6 }}</td>
+                <td>{{ set_teg3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for trali3 in trali3 %}
+              <tr>
+                <td>{{ trali3.0 }}</td>
+                <td>{{ trali3.1 }}</td>
+                <td>{{ trali3.2 }}</td>
+                <td>{{ trali3.3 }}</td>
+                <td>{{ trali3.4 }}</td>
+                <td>{{ trali3.5 }}</td>
+                <td>{{ trali3.6 }}</td>
+                <td>{{ trali3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for avtosamos3 in avtosamos3 %}
+              <tr>
+                <td>{{ avtosamos3.0 }}</td>
+                <td>{{ avtosamos3.1 }}</td>
+                <td>{{ avtosamos3.2 }}</td>
+                <td>{{ avtosamos3.3 }}</td>
+                <td>{{ avtosamos3.4 }}</td>
+                <td>{{ avtosamos3.5 }}</td>
+                <td>{{ avtosamos3.6 }}</td>
+                <td>{{ avtosamos3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for avtofur3 in avtofur3 %}
+              <tr>
+                <td>{{ avtofur3.0 }}</td>
+                <td>{{ avtofur3.1 }}</td>
+                <td>{{ avtofur3.2 }}</td>
+                <td>{{ avtofur3.3 }}</td>
+                <td>{{ avtofur3.4 }}</td>
+                <td>{{ avtofur3.5 }}</td>
+                <td>{{ avtofur3.6 }}</td>
+                <td>{{ avtofur3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for shtab3 in shtab3 %}
+              <tr>
+                <td>{{ shtab3.0 }}</td>
+                <td>{{ shtab3.1 }}</td>
+                <td>{{ shtab3.2 }}</td>
+                <td>{{ shtab3.3 }}</td>
+                <td>{{ shtab3.4 }}</td>
+                <td>{{ shtab3.5 }}</td>
+                <td>{{ shtab3.6 }}</td>
+                <td>{{ shtab3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for sanit_avto3 in sanit_avto3 %}
+              <tr>
+                <td>{{ sanit_avto3.0 }}</td>
+                <td>{{ sanit_avto3.1 }}</td>
+                <td>{{ sanit_avto3.2 }}</td>
+                <td>{{ sanit_avto3.3 }}</td>
+                <td>{{ sanit_avto3.4 }}</td>
+                <td>{{ sanit_avto3.5 }}</td>
+                <td>{{ sanit_avto3.6 }}</td>
+                <td>{{ sanit_avto3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for passazh_avto3 in passazh_avto3 %}
+              <tr>
+                <td>{{ passazh_avto3.0 }}</td>
+                <td>{{ passazh_avto3.1 }}</td>
+                <td>{{ passazh_avto3.2 }}</td>
+                <td>{{ passazh_avto3.3 }}</td>
+                <td>{{ passazh_avto3.4 }}</td>
+                <td>{{ passazh_avto3.5 }}</td>
+                <td>{{ passazh_avto3.6 }}</td>
+                <td>{{ passazh_avto3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for mto3 in mto3 %}
+              <tr>
+                <td>{{ mto3.0 }}</td>
+                <td>{{ mto3.1 }}</td>
+                <td>{{ mto3.2 }}</td>
+                <td>{{ mto3.3 }}</td>
+                <td>{{ mto3.4 }}</td>
+                <td>{{ mto3.5 }}</td>
+                <td>{{ mto3.6 }}</td>
+                <td>{{ mto3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for upm3 in upm3 %}
+              <tr>
+                <td>{{ upm3.0 }}</td>
+                <td>{{ upm3.1 }}</td>
+                <td>{{ upm3.2 }}</td>
+                <td>{{ upm3.3 }}</td>
+                <td>{{ upm3.4 }}</td>
+                <td>{{ upm3.5 }}</td>
+                <td>{{ upm3.6 }}</td>
+                <td>{{ upm3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for parm3 in parm3 %}
+              <tr>
+                <td>{{ parm3.0 }}</td>
+                <td>{{ parm3.1 }}</td>
+                <td>{{ parm3.2 }}</td>
+                <td>{{ parm3.3 }}</td>
+                <td>{{ parm3.4 }}</td>
+                <td>{{ parm3.5 }}</td>
+                <td>{{ parm3.6 }}</td>
+                <td>{{ parm3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for koles_eva3 in koles_eva3 %}
+              <tr>
+                <td>{{ koles_eva3.0 }}</td>
+                <td>{{ koles_eva3.1 }}</td>
+                <td>{{ koles_eva3.2 }}</td>
+                <td>{{ koles_eva3.3 }}</td>
+                <td>{{ koles_eva3.4 }}</td>
+                <td>{{ koles_eva3.5 }}</td>
+                <td>{{ koles_eva3.6 }}</td>
+                <td>{{ koles_eva3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for avtoshassi3 in avtoshassi3 %}
+              <tr>
+                <td>{{ avtoshassi3.0 }}</td>
+                <td>{{ avtoshassi3.1 }}</td>
+                <td>{{ avtoshassi3.2 }}</td>
+                <td>{{ avtoshassi3.3 }}</td>
+                <td>{{ avtoshassi3.4 }}</td>
+                <td>{{ avtoshassi3.5 }}</td>
+                <td>{{ avtoshassi3.6 }}</td>
+                <td>{{ avtoshassi3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for snegohod3 in snegohod3 %}
+              <tr>
+                <td>{{ snegohod3.0 }}</td>
+                <td>{{ snegohod3.1 }}</td>
+                <td>{{ snegohod3.2 }}</td>
+                <td>{{ snegohod3.3 }}</td>
+                <td>{{ snegohod3.4 }}</td>
+                <td>{{ snegohod3.5 }}</td>
+                <td>{{ snegohod3.6 }}</td>
+                <td>{{ snegohod3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for Pricep_snegohod3 in Pricep_snegohod3 %}
+              <tr>
+                <td>{{ Pricep_snegohod3.0 }}</td>
+                <td>{{ Pricep_snegohod3.1 }}</td>
+                <td>{{ Pricep_snegohod3.2 }}</td>
+                <td>{{ Pricep_snegohod3.3 }}</td>
+                <td>{{ Pricep_snegohod3.4 }}</td>
+                <td>{{ Pricep_snegohod3.5 }}</td>
+                <td>{{ Pricep_snegohod3.6 }}</td>
+                <td>{{ Pricep_snegohod3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for kvadroc3 in kvadroc3 %}
+              <tr>
+                <td>{{ kvadroc3.0 }}</td>
+                <td>{{ kvadroc3.1 }}</td>
+                <td>{{ kvadroc3.2 }}</td>
+                <td>{{ kvadroc3.3 }}</td>
+                <td>{{ kvadroc3.4 }}</td>
+                <td>{{ kvadroc3.5 }}</td>
+                <td>{{ kvadroc3.6 }}</td>
+                <td>{{ kvadroc3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for Pricep_kvadroc3 in Pricep_kvadroc3 %}
+              <tr>
+                <td>{{ Pricep_kvadroc3.0 }}</td>
+                <td>{{ Pricep_kvadroc3.1 }}</td>
+                <td>{{ Pricep_kvadroc3.2 }}</td>
+                <td>{{ Pricep_kvadroc3.3 }}</td>
+                <td>{{ Pricep_kvadroc3.4 }}</td>
+                <td>{{ Pricep_kvadroc3.5 }}</td>
+                <td>{{ Pricep_kvadroc3.6 }}</td>
+                <td>{{ Pricep_kvadroc3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for gidroc3 in gidroc3 %}
+              <tr>
+                <td>{{ gidroc3.0 }}</td>
+                <td>{{ gidroc3.1 }}</td>
+                <td>{{ gidroc3.2 }}</td>
+                <td>{{ gidroc3.3 }}</td>
+                <td>{{ gidroc3.4 }}</td>
+                <td>{{ gidroc3.5 }}</td>
+                <td>{{ gidroc3.6 }}</td>
+                <td>{{ gidroc3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for Pricep_gidroc3 in Pricep_gidroc3 %}
+              <tr>
+                <td>{{ Pricep_gidroc3.0 }}</td>
+                <td>{{ Pricep_gidroc3.1 }}</td>
+                <td>{{ Pricep_gidroc3.2 }}</td>
+                <td>{{ Pricep_gidroc3.3 }}</td>
+                <td>{{ Pricep_gidroc3.4 }}</td>
+                <td>{{ Pricep_gidroc3.5 }}</td>
+                <td>{{ Pricep_gidroc3.6 }}</td>
+                <td>{{ Pricep_gidroc3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for gus_tag3 in gus_tag3 %}
+              <tr>
+                <td>{{ gus_tag3.0 }}</td>
+                <td>{{ gus_tag3.1 }}</td>
+                <td>{{ gus_tag3.2 }}</td>
+                <td>{{ gus_tag3.3 }}</td>
+                <td>{{ gus_tag3.4 }}</td>
+                <td>{{ gus_tag3.5 }}</td>
+                <td>{{ gus_tag3.6 }}</td>
+                <td>{{ gus_tag3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for traktor3 in traktor3 %}
+              <tr>
+                <td>{{ traktor3.0 }}</td>
+                <td>{{ traktor3.1 }}</td>
+                <td>{{ traktor3.2 }}</td>
+                <td>{{ traktor3.3 }}</td>
+                <td>{{ traktor3.4 }}</td>
+                <td>{{ traktor3.5 }}</td>
+                <td>{{ traktor3.6 }}</td>
+                <td>{{ traktor3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for odnos3 in odnos3 %}
+              <tr>
+                <td>{{ odnos3.0 }}</td>
+                <td>{{ odnos3.1 }}</td>
+                <td>{{ odnos3.2 }}</td>
+                <td>{{ odnos3.3 }}</td>
+                <td>{{ odnos3.4 }}</td>
+                <td>{{ odnos3.5 }}</td>
+                <td>{{ odnos3.6 }}</td>
+                <td>{{ odnos3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for dvuhos3 in dvuhos3 %}
+              <tr>
+                <td>{{ dvuhos3.0 }}</td>
+                <td>{{ dvuhos3.1 }}</td>
+                <td>{{ dvuhos3.2 }}</td>
+                <td>{{ dvuhos3.3 }}</td>
+                <td>{{ dvuhos3.4 }}</td>
+                <td>{{ dvuhos3.5 }}</td>
+                <td>{{ dvuhos3.6 }}</td>
+                <td>{{ dvuhos3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for tazhelvoz3 in tazhelvoz3 %}
+              <tr>
+                <td>{{ tazhelvoz3.0 }}</td>
+                <td>{{ tazhelvoz3.1 }}</td>
+                <td>{{ tazhelvoz3.2 }}</td>
+                <td>{{ tazhelvoz3.3 }}</td>
+                <td>{{ tazhelvoz3.4 }}</td>
+                <td>{{ tazhelvoz3.5 }}</td>
+                <td>{{ tazhelvoz3.6 }}</td>
+                <td>{{ tazhelvoz3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for pozhar_avto3 in pozhar_avto3 %}
+              <tr>
+                <td>{{ pozhar_avto3.0 }}</td>
+                <td>{{ pozhar_avto3.1 }}</td>
+                <td>{{ pozhar_avto3.2 }}</td>
+                <td>{{ pozhar_avto3.3 }}</td>
+                <td>{{ pozhar_avto3.4 }}</td>
+                <td>{{ pozhar_avto3.5 }}</td>
+                <td>{{ pozhar_avto3.6 }}</td>
+                <td>{{ pozhar_avto3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for koles_spec_shassi3 in koles_spec_shassi3 %}
+              <tr>
+                <td>{{ koles_spec_shassi3.0 }}</td>
+                <td>{{ koles_spec_shassi3.1 }}</td>
+                <td>{{ koles_spec_shassi3.2 }}</td>
+                <td>{{ koles_spec_shassi3.3 }}</td>
+                <td>{{ koles_spec_shassi3.4 }}</td>
+                <td>{{ koles_spec_shassi3.5 }}</td>
+                <td>{{ koles_spec_shassi3.6 }}</td>
+                <td>{{ koles_spec_shassi3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for set_avto_vvt3 in set_avto_vvt3 %}
+              <tr>
+                <td>{{ set_avto_vvt3.0 }}</td>
+                <td>{{ set_avto_vvt3.1 }}</td>
+                <td>{{ set_avto_vvt3.2 }}</td>
+                <td>{{ set_avto_vvt3.3 }}</td>
+                <td>{{ set_avto_vvt3.4 }}</td>
+                <td>{{ set_avto_vvt3.5 }}</td>
+                <td>{{ set_avto_vvt3.6 }}</td>
+                <td>{{ set_avto_vvt3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for GBSH_rvis3 in GBSH_rvis3 %}
+              <tr>
+                <td>{{ GBSH_rvis3.0 }}</td>
+                <td>{{ GBSH_rvis3.1 }}</td>
+                <td>{{ GBSH_rvis3.2 }}</td>
+                <td>{{ GBSH_rvis3.3 }}</td>
+                <td>{{ GBSH_rvis3.4 }}</td>
+                <td>{{ GBSH_rvis3.5 }}</td>
+                <td>{{ GBSH_rvis3.6 }}</td>
+                <td>{{ GBSH_rvis3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for TBSH_rvis3 in TBSH_rvis3 %}
+              <tr>
+                <td>{{ TBSH_rvis3.0 }}</td>
+                <td>{{ TBSH_rvis3.1 }}</td>
+                <td>{{ TBSH_rvis3.2 }}</td>
+                <td>{{ TBSH_rvis3.3 }}</td>
+                <td>{{ TBSH_rvis3.4 }}</td>
+                <td>{{ TBSH_rvis3.5 }}</td>
+                <td>{{ TBSH_rvis3.6 }}</td>
+                <td>{{ TBSH_rvis3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for odnos_pbsh3 in odnos_pbsh3 %}
+              <tr>
+                <td>{{ odnos_pbsh3.0 }}</td>
+                <td>{{ odnos_pbsh3.1 }}</td>
+                <td>{{ odnos_pbsh3.2 }}</td>
+                <td>{{ odnos_pbsh3.3 }}</td>
+                <td>{{ odnos_pbsh3.4 }}</td>
+                <td>{{ odnos_pbsh3.5 }}</td>
+                <td>{{ odnos_pbsh3.6 }}</td>
+                <td>{{ odnos_pbsh3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for dvuhos_pbsh3 in dvuhos_pbsh3 %}
+              <tr>
+                <td>{{ dvuhos_pbsh3.0 }}</td>
+                <td>{{ dvuhos_pbsh3.1 }}</td>
+                <td>{{ dvuhos_pbsh3.2 }}</td>
+                <td>{{ dvuhos_pbsh3.3 }}</td>
+                <td>{{ dvuhos_pbsh3.4 }}</td>
+                <td>{{ dvuhos_pbsh3.5 }}</td>
+                <td>{{ dvuhos_pbsh3.6 }}</td>
+                <td>{{ dvuhos_pbsh3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tbody>
+              {% for tazhelvoz_pbsh3 in tazhelvoz_pbsh3 %}
+              <tr>
+                <td>{{ tazhelvoz_pbsh3.0 }}</td>
+                <td>{{ tazhelvoz_pbsh3.1 }}</td>
+                <td>{{ tazhelvoz_pbsh3.2 }}</td>
+                <td>{{ tazhelvoz_pbsh3.3 }}</td>
+                <td>{{ tazhelvoz_pbsh3.4 }}</td>
+                <td>{{ tazhelvoz_pbsh3.5 }}</td>
+                <td>{{ tazhelvoz_pbsh3.6 }}</td>
+                <td>{{ tazhelvoz_pbsh3.7 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+</body>
+</html>

@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0-rc.1/chartjs-plugin-datalabels.min.js" integrity="sha512-+UYTD5L/bU1sgAfWA0ELK5RlQ811q8wZIocqI7+K0Lhh8yVdIoAMEs96wJAIbgFvzynPm36ZCXtkydxu1cs27w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>ISMTO</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main\css\style.css' %}">
+</head>
+<body>
+  
+      <header class="d-flex justify-content-center py-3 heade">
+        <svg class="bi me-2" width="80" height="32"><use xlink:href="#bootstrap"></use></svg>
+
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Coat_of_arms_military-of-kazakhstan.svg/1200px-Coat_of_arms_military-of-kazakhstan.svg.png" alt="" style="height: 70px; margin-right: 15px;">
+            <p class="text-warning" >Информационная система <br>учета состояния военной автомобильной техники</p>
+          </a>
+
+
+          <a href="/main/" class="bar">Главная</a>
+          <a href="/statistics/" class="bar">Аналитика</a>
+          <a href="{% url 'admin:index' %}" class="bar">Объект АТ</a>
+          <span class="bar">Имя: {{request.user}}</span>
+          <span class="bar"><a href="{% url 'logout' %}" class="bar">Logout</a></span>
+
+
+          <!-- <button type="button" class="btn bar">АТТ</button>
+          <button type="button" class="btn bar">Обьекты ВВТ</button>
+          <button type="button" class="btn bar">Справочник</button>
+          <button type="button" class="btn bar">Отчеты</button> -->
+
+
+        <svg class="bi me-2" width="80" height="32"><use xlink:href="#bootstrap"></use></svg>
+      </header>
+
+      <div class="rod_voiska">
+        <a href="/perechen_gorodov/"><button type="button" class="btn rod" style="width: 910px;">Города</button></a>
+        </div>
+
+      <div class="rod_voiska">
+        <h3 class="zagol">Перечень АТ</h3>
+        <a href="/ckp/"><button type="button" class="btn rod">ЦКП</button></a>
+        <a href="/gus/"><button type="button" class="btn rod">ГУС</button></a>
+        <a href="/domr"><button type="button" class="btn rod">ДОМР</button></a>
+        <a href="/gut"><button type="button" class="btn rod">ГУТ</button></a>
+        <a href="/gsh/"><button type="button" class="btn rod">ГШ</button></a><br>
+        <a href="/dkivn/"><button type="button" class="btn rod">ДВОН</button></a>
+        <a href="/guvp"><button type="button" class="btn rod">ГУВП ВС РК</button></a>
+        <a href="/vms"><button type="button" class="btn rod">ВМС</button></a>
+        <a href="/svo"><button type="button" class="btn rod">СВО ВС РК</button></a>
+        <a href="/suhop_zapad"><button type="button" class="btn rod">Ргк"Запад"</button></a><br>
+        <a href="/suhop_dshv"><button type="button" class="btn rod">ДШВ</button></a>
+        <a href="/suhop_astana"><button type="button" class="btn rod">Ргк"Астана"</button></a>
+        <a href="/suhop_vostok"><button type="button" class="btn rod">Ргк"Восток"</button></a>
+        <a href="/chnp_sv"><button type="button" class="btn rod">ЧНП СВВСРК</button></a>
+        <a href="/suhop_yug"><button type="button" class="btn rod">Ргк"Юг"</button></a><br>
+        <a href="/chnp_untiv"><button type="button" class="btn rod">ЧНП УНТиВ</button></a>
+        <a href="/gusv"><button type="button" class="btn rod">ГУСВ ВС РК</button></a>
+        <a href="/grau"><button type="button" class="btn rod">ГРАУ ВС РК</button></a>
+        <a href="/gurv"><button type="button" class="btn rod">ГУРВ ВС РК</button></a>
+        <a href="/rv14"><button type="button" class="btn rod">14</button></a><br>
+        <a href="/guv"><button type="button" class="btn rod">ГУВ ВС РК</button></a>
+        <a href="/nuo/"><button type="button" class="btn rod">Example</button></a>
+      </div>
+      
+      <div class="analytics">
+        <h3 class="zagol">Аналитика</h3>
+        {% block zagol %}{% endblock %}
+      </div>
+
+      <div class="rod_voiska">
+        <a href="/statistics/"><button type="button" class="btn categ">Тип АТ</button></a>
+        <a href="/gruppa_eks/"><button type="button" class="btn categ">По группам эксплутации</button></a>
+        <a href="/sort_po_category"><button type="button" class="btn categ">По категориям</button></a>
+        <a href="/sort_po_godam"><button type="button" class="btn categ">По годам</button></a>
+      </div>
+      
+
+      <div class="content">
+        
+        <div class="att">
+          <h5 class="zagol_an">Легковые</h5>
+          <canvas id="myChart" width="440" height="400"></canvas>
+        <script>
+        const legko = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(legko, {
+            type: 'bar',
+            data: {
+                labels: ['до 5 лет', 'от 5 до 10 лет', 'свыше 10'],
+                datasets: [{
+                    label: 'Легковые',
+                    data: [484, 248, 686],
+                    backgroundColor: [
+                        'rgba(235, 235, 0)',
+                        'rgba(54, 162, 235)',
+                        'rgba(60, 170, 90)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(235, 235, 0, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(60, 170, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                    }
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">Грузовые</h5>
+          <canvas id="myChart2" width="440" height="400"></canvas>
+        <script>
+        const borto = document.getElementById('myChart2').getContext('2d');
+        const myChart2 = new Chart(borto, {
+            type: 'bar',
+            data: {
+                labels: ['до 5 лет', 'от 5 до 10 лет', 'свыше 10'],
+                datasets: [{
+                    label: 'Грузовые',
+                    data: [1305, 985, 2127],
+                    backgroundColor: [
+                        'rgba(235, 235, 0)',
+                        'rgba(54, 162, 235)',
+                        'rgba(60, 170, 90)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(235, 235, 0, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(60, 170, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                    }
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+          <!-- <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Потребность</th>
+                <th scope="col">Имеется</th>
+                <th scope="col">Некомплект</th>
+                <th scope="col">Излишествует</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for Bortov in Bortov %}
+              <tr>
+                <td>{{ Bortov.0 }}</td>
+                <td>{{ Bortov.1 }}</td>
+                <td>{{ Bortov.2 }}</td>
+                <td>{{ Bortov.3 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table> -->
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">Штабные</h5>
+          <canvas id="myChart3" width="440" height="400"></canvas>
+        <script>
+        const shtab = document.getElementById('myChart3').getContext('2d');
+        const myChart3 = new Chart(shtab, {
+            type: 'bar',
+            data: {
+                labels: ['до 5 лет', 'от 5 до 10 лет', 'свыше 10'],
+                datasets: [{
+                    label: 'Штабные',
+                    data: [78, 55, 146],
+                    backgroundColor: [
+                        'rgba(235, 235, 0)',
+                        'rgba(54, 162, 235)',
+                        'rgba(60, 170, 90)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(235, 235, 0, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(60, 170, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                    }
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+          <!-- <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Потребность</th>
+                <th scope="col">Имеется</th>
+                <th scope="col">Некомплект</th>
+                <th scope="col">Излишествует</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for Shtab in Shtab %}
+              <tr>
+                <td>{{ Shtab.0 }}</td>
+                <td>{{ Shtab.1 }}</td>
+                <td>{{ Shtab.2 }}</td>
+                <td>{{ Shtab.3 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table> -->
+        </div>
+      </div>
+      
+      <div class="content">
+        
+        <div class="att">
+          <h5 class="zagol_an">Санитарные</h5>
+          <canvas id="myChart4" width="440" height="400"></canvas>
+        <script>
+        const sanit = document.getElementById('myChart4').getContext('2d');
+        const myChart4 = new Chart(sanit, {
+            type: 'bar',
+            data: {
+                labels: ['до 5 лет', 'от 5 до 10 лет', 'свыше 10'],
+                datasets: [{
+                    label: 'Санитарные',
+                    data: [40, 52, 126],
+                    backgroundColor: [
+                        'rgba(235, 235, 0)',
+                        'rgba(54, 162, 235)',
+                        'rgba(60, 170, 90)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(235, 235, 0, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(60, 170, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                    }
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+          <!-- <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Потребность</th>
+                <th scope="col">Имеется</th>
+                <th scope="col">Некомплект</th>
+                <th scope="col">Излишествует</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for Sanit in Sanit %}
+              <tr>
+                <td>{{ Sanit.0 }}</td>
+                <td>{{ Sanit.1 }}</td>
+                <td>{{ Sanit.2 }}</td>
+                <td>{{ Sanit.3 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table> -->
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">Автобус</h5>
+          <canvas id="myChart5" width="440" height="400"></canvas>
+        <script>
+        const passazh = document.getElementById('myChart5').getContext('2d');
+        const myChart5 = new Chart(passazh, {
+            type: 'bar',
+            data: {
+                labels: ['до 5 лет', 'от 5 до 10 лет', 'свыше 10'],
+                datasets: [{
+                    label: 'Автобус',
+                    data: [158, 87, 162],
+                    backgroundColor: [
+                        'rgba(235, 235, 0)',
+                        'rgba(54, 162, 235)',
+                        'rgba(60, 170, 90)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(235, 235, 0, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(60, 170, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                    }
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+          <!-- <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Потребность</th>
+                <th scope="col">Имеется</th>
+                <th scope="col">Некомплект</th>
+                <th scope="col">Излишествует</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for Passazh in Passazh %}
+              <tr>
+                <td>{{ Passazh.0 }}</td>
+                <td>{{ Passazh.1 }}</td>
+                <td>{{ Passazh.2 }}</td>
+                <td>{{ Passazh.3 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table> -->
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">MTO</h5>
+          <canvas id="myChart6" width="440" height="400"></canvas>
+        <script>
+        const mto = document.getElementById('myChart6').getContext('2d');
+        const myChart6 = new Chart(mto, {
+            type: 'bar',
+            data: {
+                labels: ['до 5 лет', 'от 5 до 10 лет', 'свыше 10'],
+                datasets: [{
+                    label: 'MTO',
+                    data: [6, 13, 280],
+                    backgroundColor: [
+                        'rgba(235, 235, 0)',
+                        'rgba(54, 162, 235)',
+                        'rgba(60, 170, 90)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(235, 235, 0, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(60, 170, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                    }
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+          <!-- <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Потребность</th>
+                <th scope="col">Имеется</th>
+                <th scope="col">Некомплект</th>
+                <th scope="col">Излишествует</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for MTO in MTO %}
+              <tr>
+                <td>{{ MTO.0 }}</td>
+                <td>{{ MTO.1 }}</td>
+                <td>{{ MTO.2 }}</td>
+                <td>{{ MTO.3 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table> -->
+        </div>
+      </div>
+
+      <div class="content">
+        
+        <div class="att">
+          <h5 class="zagol_an">УПМ</h5>
+          <canvas id="myChart7" width="445" height="400"></canvas>
+        <script>
+        const upm = document.getElementById('myChart7').getContext('2d');
+        const myChart7 = new Chart(upm, {
+            type: 'bar',
+            data: {
+                labels: ['до 5 лет', 'от 5 до 10 лет', 'свыше 10'],
+                datasets: [{
+                    label: 'УПМ',
+                    data: [9, 5, 236],
+                    backgroundColor: [
+                        'rgba(235, 235, 0)',
+                        'rgba(54, 162, 235)',
+                        'rgba(60, 170, 90)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(235, 235, 0, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(60, 170, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                    }
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+          <!-- <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Потребность</th>
+                <th scope="col">Имеется</th>
+                <th scope="col">Некомплект</th>
+                <th scope="col">Излишествует</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for UPM in UPM %}
+              <tr>
+                <td>{{ UPM.0 }}</td>
+                <td>{{ UPM.1 }}</td>
+                <td>{{ UPM.2 }}</td>
+                <td>{{ UPM.3 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table> -->
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">ПАРМ</h5>
+          <canvas id="myChart8" width="445" height="400"></canvas>
+        <script>
+        const parm = document.getElementById('myChart8').getContext('2d');
+        const myChart8 = new Chart(parm, {
+            type: 'bar',
+            data: {
+                labels: ['до 5 лет', 'от 5 до 10 лет', 'свыше 10'],
+                datasets: [{
+                    label: 'ПАРМ',
+                    data: [, 4, 104],
+                    backgroundColor: [
+                        'rgba(235, 235, 0)',
+                        'rgba(54, 162, 235)',
+                        'rgba(60, 170, 90)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(235, 235, 0, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(60, 170, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                    }
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+          <!-- <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Потребность</th>
+                <th scope="col">Имеется</th>
+                <th scope="col">Некомплект</th>
+                <th scope="col">Излишествует</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for PARM in PARM %}
+              <tr>
+                <td>{{ PARM.0 }}</td>
+                <td>{{ PARM.1 }}</td>
+                <td>{{ PARM.2 }}</td>
+                <td>{{ PARM.3 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table> -->
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">Колесные эвакотягачи</h5>
+          <canvas id="myChart9" width="445" height="400"></canvas>
+        <script>
+        const kol_eva = document.getElementById('myChart9').getContext('2d');
+        const myChart9 = new Chart(kol_eva, {
+            type: 'bar',
+            data: {
+                labels: ['до 5 лет', 'от 5 до 10 лет', 'свыше 10'],
+                datasets: [{
+                    label: 'Колесные эвакотягачи',
+                    data: [47, 11, 37],
+                    backgroundColor: [
+                        'rgba(235, 235, 0)',
+                        'rgba(54, 162, 235)',
+                        'rgba(60, 170, 90)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(235, 235, 0, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(60, 170, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                    }
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+          <!-- <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Потребность</th>
+                <th scope="col">Имеется</th>
+                <th scope="col">Некомплект</th>
+                <th scope="col">Излишествует</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for Koles_eva in Koles_eva %}
+              <tr>
+                <td>{{ Koles_eva.0 }}</td>
+                <td>{{ Koles_eva.1 }}</td>
+                <td>{{ Koles_eva.2 }}</td>
+                <td>{{ Koles_eva.3 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table> -->
+        </div>
+      </div>
+      
+      <div class="content">
+        
+        <div class="att">
+          <h5 class="zagol_an">Гусеничные тягачи</h5>
+          <canvas id="myChart10" width="445" height="400"></canvas>
+        <script>
+        const gusen = document.getElementById('myChart10').getContext('2d');
+        const myChart10 = new Chart(gusen, {
+            type: 'bar',
+            data: {
+                labels: ['до 5 лет', 'от 5 до 10 лет', 'свыше 10'],
+                datasets: [{
+                    label: 'Гусеничные тягачи',
+                    data: [, , 1505],
+                    backgroundColor: [
+                        'rgba(235, 235, 0)',
+                        'rgba(54, 162, 235)',
+                        'rgba(60, 170, 90)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(235, 235, 0, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(60, 170, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                    }
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+          <!-- <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Потребность</th>
+                <th scope="col">Имеется</th>
+                <th scope="col">Некомплект</th>
+                <th scope="col">Излишествует</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for Gusen in Gusen %}
+              <tr>
+                <td>{{ Gusen.0 }}</td>
+                <td>{{ Gusen.1 }}</td>
+                <td>{{ Gusen.2 }}</td>
+                <td>{{ Gusen.3 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table> -->
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">Тракторы</h5>
+          <canvas id="myChart11" width="445" height="400"></canvas>
+        <script>
+        const traktor = document.getElementById('myChart11').getContext('2d');
+        const myChart11 = new Chart(traktor, {
+            type: 'bar',
+            data: {
+                labels: ['до 5 лет', 'от 5 до 10 лет', 'свыше 10'],
+                datasets: [{
+                    label: 'Тракторы',
+                    data: [16, 20, 67],
+                    backgroundColor: [
+                        'rgba(235, 235, 0)',
+                        'rgba(54, 162, 235)',
+                        'rgba(60, 170, 90)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(235, 235, 0, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(60, 170, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                    }
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+          <!-- <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Потребность</th>
+                <th scope="col">Имеется</th>
+                <th scope="col">Некомплект</th>
+                <th scope="col">Излишествует</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for Traktor in Traktor %}
+              <tr>
+                <td>{{ Traktor.0 }}</td>
+                <td>{{ Traktor.1 }}</td>
+                <td>{{ Traktor.2 }}</td>
+                <td>{{ Traktor.3 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table> -->
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">Прицепы грузовые</h5>
+          <canvas id="myChart12" width="445" height="400"></canvas>
+        <script>
+        const pricep_gruz = document.getElementById('myChart12').getContext('2d');
+        const myChart12 = new Chart(pricep_gruz, {
+            type: 'bar',
+            data: {
+                labels: ['до 5 лет', 'от 5 до 10 лет', 'свыше 10'],
+                datasets: [{
+                    label: 'Прицепы грузовые',
+                    data: [291, 98, 1108],
+                    backgroundColor: [
+                        'rgba(235, 235, 0)',
+                        'rgba(54, 162, 235)',
+                        'rgba(60, 170, 90)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(235, 235, 0, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(60, 170, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                    }
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+          <!-- <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Потребность</th>
+                <th scope="col">Имеется</th>
+                <th scope="col">Некомплект</th>
+                <th scope="col">Излишествует</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for Pricep_gruz in Pricep_gruz %}
+              <tr>
+                <td>{{ Pricep_gruz.0 }}</td>
+                <td>{{ Pricep_gruz.1 }}</td>
+                <td>{{ Pricep_gruz.2 }}</td>
+                <td>{{ Pricep_gruz.3 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table> -->
+        </div>
+      </div>
+      
+      <div class="content">
+        
+        <div class="att">
+          <h5 class="zagol_an">Снегоходы</h5>
+          <canvas id="myChart13" width="445" height="400"></canvas>
+          <script>
+          const snegohod = document.getElementById('myChart13').getContext('2d');
+          const myChart13 = new Chart(snegohod, {
+            type: 'bar',
+            data: {
+                labels: ['до 5 лет', 'от 5 до 10 лет', 'свыше 10'],
+                datasets: [{
+                    label: 'Снегоходы',
+                    data: [7, 2, 2],
+                    backgroundColor: [
+                        'rgba(235, 235, 0)',
+                        'rgba(54, 162, 235)',
+                        'rgba(60, 170, 90)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(235, 235, 0, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(60, 170, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                    }
+                  }]
+              },
+              plugins: [ChartDataLabels],
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+          <!-- <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Потребность</th>
+                <th scope="col">Имеется</th>
+                <th scope="col">Некомплект</th>
+                <th scope="col">Излишествует</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for Snegohod in Snegohod %}
+              <tr>
+                <td>{{ Snegohod.0 }}</td>
+                <td>{{ Snegohod.1 }}</td>
+                <td>{{ Snegohod.2 }}</td>
+                <td>{{ Snegohod.3 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table> -->
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">Квадроциклы</h5>
+          <canvas id="myChart14" width="445" height="400"></canvas>
+          <script>
+          const kvadroc = document.getElementById('myChart14').getContext('2d');
+          const myChart14 = new Chart(kvadroc, {
+            type: 'bar',
+            data: {
+                labels: ['до 5 лет', 'от 5 до 10 лет', 'свыше 10'],
+                datasets: [{
+                    label: 'Квадроциклы',
+                    data: [51, 14, ],
+                    backgroundColor: [
+                        'rgba(235, 235, 0)',
+                        'rgba(54, 162, 235)',
+                        'rgba(60, 170, 90)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(235, 235, 0, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(60, 170, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                    }
+                  }]
+              },
+              plugins: [ChartDataLabels],
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+          <!-- <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Потребность</th>
+                <th scope="col">Имеется</th>
+                <th scope="col">Некомплект</th>
+                <th scope="col">Излишествует</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for Kvadroc in Kvadroc %}
+              <tr>
+                <td>{{ Kvadroc.0 }}</td>
+                <td>{{ Kvadroc.1 }}</td>
+                <td>{{ Kvadroc.2 }}</td>
+                <td>{{ Kvadroc.3 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table> -->
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">Гидроциклы</h5>
+          <canvas id="myChart15" width="445" height="400"></canvas>
+          <script>
+          const gidroc = document.getElementById('myChart15').getContext('2d');
+          const myChart15 = new Chart(gidroc, {
+            type: 'bar',
+            data: {
+                labels: ['до 5 лет', 'от 5 до 10 лет', 'свыше 10'],
+                datasets: [{
+                    label: 'Гидроциклы',
+                    data: [6, , ],
+                    backgroundColor: [
+                        'rgba(235, 235, 0)',
+                        'rgba(54, 162, 235)',
+                        'rgba(60, 170, 90)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(235, 235, 0, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(60, 170, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                    }
+                  }]
+              },
+              plugins: [ChartDataLabels],
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+          <!-- <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Потребность</th>
+                <th scope="col">Имеется</th>
+                <th scope="col">Некомплект</th>
+                <th scope="col">Излишествует</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for Gidroc in Gidroc %}
+              <tr>
+                <td>{{ Gidroc.0 }}</td>
+                <td>{{ Gidroc.1 }}</td>
+                <td>{{ Gidroc.2 }}</td>
+                <td>{{ Gidroc.3 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table> -->
+        </div>
+      </div>
+
+      <div class="content">
+        
+        <div class="att">
+          <h5 class="zagol_an">Прицепы для снегоходов</h5>
+          <canvas id="myChart16" width="445" height="400"></canvas>
+          <script>
+          const pricep_snegohod = document.getElementById('myChart16').getContext('2d');
+          const myChart16 = new Chart(pricep_snegohod, {
+            type: 'bar',
+            data: {
+                labels: ['до 5 лет', 'от 5 до 10 лет', 'свыше 10'],
+                datasets: [{
+                    label: 'Прицепы для снегоходов',
+                    data: [6, 2, 2],
+                    backgroundColor: [
+                        'rgba(235, 235, 0)',
+                        'rgba(54, 162, 235)',
+                        'rgba(60, 170, 90)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(235, 235, 0, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(60, 170, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                    }
+                  }]
+              },
+              plugins: [ChartDataLabels],
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+          <!-- <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Потребность</th>
+                <th scope="col">Имеется</th>
+                <th scope="col">Некомплект</th>
+                <th scope="col">Излишествует</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for Pricep_snegohod in Pricep_snegohod %}
+              <tr>
+                <td>{{ Pricep_snegohod.0 }}</td>
+                <td>{{ Pricep_snegohod.1 }}</td>
+                <td>{{ Pricep_snegohod.2 }}</td>
+                <td>{{ Pricep_snegohod.3 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table> -->
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">Прицепы для квадроциклов</h5>
+          <canvas id="myChart17" width="445" height="400"></canvas>
+          <script>
+          const pricep_kvadroc = document.getElementById('myChart17').getContext('2d');
+          const myChart17 = new Chart(pricep_kvadroc, {
+            type: 'bar',
+            data: {
+                labels: ['до 5 лет', 'от 5 до 10 лет', 'свыше 10'],
+                datasets: [{
+                    label: 'Прицепы для квадроциклов',
+                    data: [24, , ],
+                    backgroundColor: [
+                        'rgba(235, 235, 0)',
+                        'rgba(54, 162, 235)',
+                        'rgba(60, 170, 90)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(235, 235, 0, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(60, 170, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                    }
+                  }]
+              },
+              plugins: [ChartDataLabels],
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+          <!-- <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Потребность</th>
+                <th scope="col">Имеется</th>
+                <th scope="col">Некомплект</th>
+                <th scope="col">Излишествует</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for Pricep_kvadroc in Pricep_kvadroc %}
+              <tr>
+                <td>{{ Pricep_kvadroc.0 }}</td>
+                <td>{{ Pricep_kvadroc.1 }}</td>
+                <td>{{ Pricep_kvadroc.2 }}</td>
+                <td>{{ Pricep_kvadroc.3 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table> -->
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">Прицепы для гидроциклов</h5>
+          <canvas id="myChart18" width="445" height="400"></canvas>
+          <script>
+          const pricep_gidroc = document.getElementById('myChart18').getContext('2d');
+          const myChart18 = new Chart(pricep_gidroc, {
+            type: 'bar',
+            data: {
+                labels: ['до 5 лет', 'от 5 до 10 лет', 'свыше 10'],
+                datasets: [{
+                    label: 'Прицепы для гидроциклов',
+                    data: [6, , ],
+                    backgroundColor: [
+                        'rgba(235, 235, 0)',
+                        'rgba(54, 162, 235)',
+                        'rgba(60, 170, 90)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(235, 235, 0, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(60, 170, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                    }
+                  }]
+              },
+              plugins: [ChartDataLabels],
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+          <!-- <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Потребность</th>
+                <th scope="col">Имеется</th>
+                <th scope="col">Некомплект</th>
+                <th scope="col">Излишествует</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for Pricep_gidroc in Pricep_gidroc %}
+              <tr>
+                <td>{{ Pricep_gidroc.0 }}</td>
+                <td>{{ Pricep_gidroc.1 }}</td>
+                <td>{{ Pricep_gidroc.2 }}</td>
+                <td>{{ Pricep_gidroc.3 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table> -->
+        </div>
+      </div>
+      
+      <div class="content">
+        
+        <div class="att">
+          <h5 class="zagol_an">Пожарные автомобили</h5>
+          <canvas id="myChart19" width="445" height="400"></canvas>
+          <script>
+          const pozhar_avto = document.getElementById('myChart19').getContext('2d');
+          const myChart19 = new Chart(pozhar_avto, {
+            type: 'bar',
+            data: {
+                labels: ['до 5 лет', 'от 5 до 10 лет', 'свыше 10'],
+                datasets: [{
+                    label: 'Пожарные автомобили',
+                    data: [59, 32, 86],
+                    backgroundColor: [
+                        'rgba(235, 235, 0)',
+                        'rgba(54, 162, 235)',
+                        'rgba(60, 170, 90)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(235, 235, 0, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(60, 170, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                    }
+                  }]
+              },
+              plugins: [ChartDataLabels],
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+          <!-- <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Потребность</th>
+                <th scope="col">Имеется</th>
+                <th scope="col">Некомплект</th>
+                <th scope="col">Излишествует</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for Pozhar_avto in Pozhar_avto %}
+              <tr>
+                <td>{{ Pozhar_avto.0 }}</td>
+                <td>{{ Pozhar_avto.1 }}</td>
+                <td>{{ Pozhar_avto.2 }}</td>
+                <td>{{ Pozhar_avto.3 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table> -->
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">АБШ РВиС</h5>
+          <canvas id="myChart20" width="445" height="400"></canvas>
+          <script>
+          const absh_rvis = document.getElementById('myChart20').getContext('2d');
+          const myChart20 = new Chart(absh_rvis, {
+            type: 'bar',
+            data: {
+                labels: ['до 5 лет', 'от 5 до 10 лет', 'свыше 10'],
+                datasets: [{
+                    label: 'АБШ РВиС',
+                    data: [765, 960, 6579],
+                    backgroundColor: [
+                        'rgba(235, 235, 0)',
+                        'rgba(54, 162, 235)',
+                        'rgba(60, 170, 90)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(235, 235, 0, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(60, 170, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                    }
+                  }]
+              },
+              plugins: [ChartDataLabels],
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+          <!-- <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Потребность</th>
+                <th scope="col">Имеется</th>
+                <th scope="col">Некомплект</th>
+                <th scope="col">Излишествует</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for ABSH_rvis in ABSH_rvis %}
+              <tr>
+                <td>{{ ABSH_rvis.0 }}</td>
+                <td>{{ ABSH_rvis.1 }}</td>
+                <td>{{ ABSH_rvis.2 }}</td>
+                <td>{{ ABSH_rvis.3 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table> -->
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">ГБШ РВиС</h5>
+          <canvas id="myChart21" width="445" height="400"></canvas>
+          <script>
+          const gbsh_rvis = document.getElementById('myChart21').getContext('2d');
+          const myChart21 = new Chart(gbsh_rvis, {
+            type: 'bar',
+            data: {
+                labels: ['до 5 лет', 'от 5 до 10 лет', 'свыше 10'],
+                datasets: [{
+                    label: 'ГБШ РВиС',
+                    data: [, , 641],
+                    backgroundColor: [
+                        'rgba(235, 235, 0)',
+                        'rgba(54, 162, 235)',
+                        'rgba(60, 170, 90)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(235, 235, 0, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(60, 170, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                    }
+                  }]
+              },
+              plugins: [ChartDataLabels],
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+          <!-- <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Потребность</th>
+                <th scope="col">Имеется</th>
+                <th scope="col">Некомплект</th>
+                <th scope="col">Излишествует</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for GBSH_rvis in GBSH_rvis %}
+              <tr>
+                <td>{{ GBSH_rvis.0 }}</td>
+                <td>{{ GBSH_rvis.1 }}</td>
+                <td>{{ GBSH_rvis.2 }}</td>
+                <td>{{ GBSH_rvis.3 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table> -->
+        </div>
+      </div>
+      
+      <div class="content">
+      
+        <div class="att">
+          <h5 class="zagol_an">ТБШ РВиС</h5>
+          <canvas id="myChart22" width="445" height="400"></canvas>
+          <script>
+          const tbsh_rvis = document.getElementById('myChart22').getContext('2d');
+          const myChart22 = new Chart(tbsh_rvis, {
+            type: 'bar',
+            data: {
+                labels: ['до 5 лет', 'от 5 до 10 лет', 'свыше 10'],
+                datasets: [{
+                    label: 'ТБШ РВиС',
+                    data: [17, 13, 114],
+                    backgroundColor: [
+                        'rgba(235, 235, 0)',
+                        'rgba(54, 162, 235)',
+                        'rgba(60, 170, 90)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(235, 235, 0, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(60, 170, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                    }
+                  }]
+              },
+              plugins: [ChartDataLabels],
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+          <!-- <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Потребность</th>
+                <th scope="col">Имеется</th>
+                <th scope="col">Некомплект</th>
+                <th scope="col">Излишествует</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for TBSH_rvis in TBSH_rvis %}
+              <tr>
+                <td>{{ TBSH_rvis.0 }}</td>
+                <td>{{ TBSH_rvis.1 }}</td>
+                <td>{{ TBSH_rvis.2 }}</td>
+                <td>{{ TBSH_rvis.3 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table> -->
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">ПБШ РВиС</h5>
+          <canvas id="myChart23" width="445" height="400"></canvas>
+          <script>
+          const pbsh_rvis = document.getElementById('myChart23').getContext('2d');
+          const myChart23 = new Chart(pbsh_rvis, {
+            type: 'bar',
+            data: {
+                labels: ['до 5 лет', 'от 5 до 10 лет', 'свыше 10'],
+                datasets: [{
+                    label: 'ПБШ РВиС',
+                    data: [14, 3, 2759],
+                    backgroundColor: [
+                        'rgba(235, 235, 0)',
+                        'rgba(54, 162, 235)',
+                        'rgba(60, 170, 90)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(235, 235, 0, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(60, 170, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                    }
+                  }]
+              },
+              plugins: [ChartDataLabels],
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+          <!-- <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Потребность</th>
+                <th scope="col">Имеется</th>
+                <th scope="col">Некомплект</th>
+                <th scope="col">Излишествует</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for PBSH_rvis in PBSH_rvis %}
+              <tr>
+                <td>{{ PBSH_rvis.0 }}</td>
+                <td>{{ PBSH_rvis.1 }}</td>
+                <td>{{ PBSH_rvis.2 }}</td>
+                <td>{{ PBSH_rvis.3 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table> -->
+        </div>
+
+        <div class="att">
+          <h5 class="zagol_an">Автошасси</h5>
+          <canvas id="myChart24" width="445" height="400"></canvas>
+          <script>
+          const avtoshassi = document.getElementById('myChart24').getContext('2d');
+          const myChart24 = new Chart(avtoshassi, {
+            type: 'bar',
+            data: {
+                labels: ['до 5 лет', 'от 5 до 10 лет', 'свыше 10'],
+                datasets: [{
+                    label: 'Автошасси',
+                    data: [9, 2, 366],
+                    backgroundColor: [
+                        'rgba(235, 235, 0)',
+                        'rgba(54, 162, 235)',
+                        'rgba(60, 170, 90)',
+                        'rgba(75, 192, 192)',
+                        'rgba(153, 102, 255)',
+                        'rgba(255, 159, 64)'
+                    ],
+                    borderColor: [
+                        'rgba(235, 235, 0, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(60, 170, 90, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderWidth: 1,
+                      datalabels: {
+                          color: 'black'
+                    }
+                  }]
+              },
+              plugins: [ChartDataLabels],
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+          <!-- <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Потребность</th>
+                <th scope="col">Имеется</th>
+                <th scope="col">Некомплект</th>
+                <th scope="col">Излишествует</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for Abtoshassi in Abtoshassi %}
+              <tr>
+                <td>{{ Abtoshassi.0 }}</td>
+                <td>{{ Abtoshassi.1 }}</td>
+                <td>{{ Abtoshassi.2 }}</td>
+                <td>{{ Abtoshassi.3 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table> -->
+        </div>
+      </div>
+
+      
+
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

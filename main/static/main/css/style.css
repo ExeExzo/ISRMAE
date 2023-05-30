@@ -1,0 +1,193 @@
+
+.rod_voiska {
+  justify-content: center;
+  text-align: center;
+  margin-left: auto;
+  margin-block-end: auto;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  color: black;
+}
+
+.goda{
+  color: #09106A;
+  text-shadow: 1px 1px 2px, 0 0  #09106A;
+}
+
+a{
+  text-decoration: none;
+}
+
+.bar{
+  color: white;
+  font-size: 22px;
+  margin: 10px;
+}
+
+.heade{
+  background-color: #09106A;
+}
+
+.text-warning{
+  margin-top: auto;
+  margin-bottom: 0rem;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.zagol{
+  text-align: center;
+  color: #09106A;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.zagoltrans{
+  text-align: center;
+  color: #09106A;
+  margin-top: 40px;
+  font-weight: bold;
+}
+
+.container{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+.th{
+  border-radius: 5px;
+  color: white;
+  margin: 1px;
+  text-align: center;
+}
+
+.th1{
+  font-size: 20px;
+  color: white;
+  border-radius: 5px;
+  margin: 1px;
+  text-align: center;
+  background-color: rgb(21, 21, 146); 
+  border-color: white; 
+  border-width: 5px; 
+  border-radius: 15px;
+}
+
+.td{
+  border-radius: 5px;
+  margin: 1px;
+  text-align: center;
+}
+
+.td1{
+  border-radius: 5px;
+  margin: 1px;
+  text-align: center;
+  background-color: rgb(230, 230, 230); 
+  border-radius: 8px; 
+  border-color: white; 
+  border-width: 5px; 
+  border-radius: 15px; 
+  text-align: center; 
+  vertical-align: middle
+}
+
+.rod{
+  font-size: 20px;
+  font-weight: bold;
+  width: 170px;
+  height: 55px;
+  background-color: #E2E2E2;
+  margin: 5px;
+  border-radius: 8px;
+}
+
+.rod4{
+  font-size: 16px;
+  font-weight: bold;
+  width: 170px;
+  height: 78px;
+  background-color: #E2E2E2;
+  margin: 5px;
+  border-radius: 8px;
+  padding: 2px;
+}
+
+.rod5{
+  font-size: 18px;
+  font-weight: bold;
+  width: 170px;
+  height: 65px;
+  background-color: #E2E2E2;
+  margin: 5px;
+  border-radius: 8px;
+}
+
+.rod2{
+  font-size: 16px;
+  font-weight: bold;
+  width: 725px;
+  height: 55px;
+  background-color: #E2E2E2;
+  margin: 5px;
+  border-radius: 8px;
+}
+
+.rod3{
+  font-size: 16px;
+  font-weight: bold;
+  width: 725px;
+  height: 55px;
+  background-color: #E2E2E2;
+  margin: 5px;
+  border-radius: 8px;
+}
+
+.categ{
+  font-size: 24px;
+  font-weight: bold;
+  width: 330px;
+  height: 80px;
+  background-color: #E2E2E2;
+  margin: 5px;
+  border-radius: 8px;
+}
+
+.nav{
+  text-align: center;
+}
+
+.content{
+  display: table;
+  table-layout: fixed; 
+  border-spacing: 10px;
+  justify-content: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.att{
+  display: table-cell;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  padding: 3px;
+  
+}
+
+.zagol_an{
+  text-align: center;
+}
+
+.vniz{
+  background-color: #09106A;
+}
+
+/* register */
+

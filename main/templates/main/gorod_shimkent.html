@@ -1,0 +1,23 @@
+{% extends 'main/statistics.html' %}
+
+{% block att %}
+<div class="rod_voiska">
+    <h3 class="zagol">Перечень АТ</h3>
+    
+    {% for i in buttons %}
+    <button onclick="location.href='../obshi/' + {{i.id_voiskovie_chasti}}" id="2" type="button" class="btn rod">{{i.name}}</button>
+      {% if forloop.counter == 5 or forloop.counter == 10 or forloop.counter == 15 or forloop.counter == 20 or forloop.counter == 25 or forloop.counter == 30 or forloop.counter == 35 or forloop.counter == 40 %}
+      <br>
+      {% endif %}
+      
+    {%endfor%}
+  </div>
+{% endblock %}
+
+{% block gorodstat %}
+<h5 class="zagol">Шымкент</h5>
+{% endblock %}
+
+{% block zagol %}
+<h4 class="zagol">Город Шымкент</h4>
+{% endblock %}

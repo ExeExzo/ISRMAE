@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+    <title>ISMTO</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static '\main\css\style.css' %}">
+    <style>
+      .formField {
+          width: 100%;
+          display: flex;
+          align-items: flex-start;
+          justify-content: center;
+          flex-direction: column;
+          gap: 5px;
+      }
+      .formField label {
+          padding: 0 15px ;
+          font-weight: bolder;
+      }
+      .formField input {
+          font-size: 1rem;
+          border: 1px solid #9d9d9d;
+          border-radius: 5px;
+          padding: 10px 15px;
+          width: calc(100% - 30px - 2px);
+      }
+      .formField select {
+          font-size: 1rem;
+          border: 1px solid #9d9d9d;
+          border-radius: 5px;
+          padding: 10px 15px;
+          width: calc(100%);
+      }
+      .required {
+          color: red;
+      }
+
+      .checkboxes {
+          display: flex;
+          align-items: flex-start;
+          justify-content: flex-start;
+          gap: 25px;
+          flex-wrap: wrap;
+          width: 100%;
+      }
+      .imagesBlock {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .imagesBlock img{
+        height: 175px;
+      }
+
+      .bigBlock {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+        gap: 25px;
+        margin-top: 75px;
+        margin-bottom: 75px;
+      }
+      .bigBlock1 {
+        width: 100%;
+        display: flex;
+        gap: 25px;
+        margin-top: 75px;
+        margin-bottom: 75px;
+      }
+      .bigBlock2 {
+        margin-bottom: 130px;
+      }
+      .divider {
+        width: 100%;
+        height: 1px;
+        background-color: black;
+      }
+
+      .myBtn {
+        padding: 10px 50px;
+        border: 1px solid #17a2b8;
+        background-color: white;
+        color: #17a2b8;
+        font-weight: bolder;
+        text-align: center;
+        cursor: pointer;
+      }
+      .myBtn:hover {
+        border: 1px solid white;
+        background-color: #17a2b8;
+        color: white;
+      }
+
+      .myBtn1 {
+        padding: 10px 50px;
+        border: 1px solid #17a2b8;
+        background-color: white;
+        color: #17a2b8;
+        font-weight: bolder;
+        text-align: center;
+        cursor: pointer;
+        width: 93%;
+      }
+      .myBtn1:hover {
+        border: 1px solid white;
+        background-color: #17a2b8;
+        color: white;
+      }
+    </style>
+</head>
+<body>
+  
+      <header class="d-flex justify-content-center py-3 heade">
+        <svg class="bi me-2" width="80" height="32"><use xlink:href="#bootstrap"></use></svg>
+
+        <a  class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Coat_of_arms_military-of-kazakhstan.svg/1200px-Coat_of_arms_military-of-kazakhstan.svg.png" alt="" style="height: 70px; margin-right: 15px;">
+            <p class="text-warning" >Информационная система <br>учета состояния военной автомобильной техники</p>
+          </a>
+
+
+          <a href="/main/" class="bar">Главная</a>
+          <a href="/statistics/" class="bar">Аналитика</a>
+          <a href="{% url 'admin:index' %}" class="bar">Объект АТ</a>
+          <span class="bar">Имя: {{request.user}}</span>
+          <span class="bar"><a href="{% url 'logout' %}" class="bar">Logout</a></span>
+
+
+          <!-- <button type="button" class="btn bar">АТТ</button>
+          <button type="button" class="btn bar">Обьекты ВВТ</button>
+          <button type="button" class="btn bar">Справочник</button>
+          <button type="button" class="btn bar">Отчеты</button> -->
+
+
+        <svg class="bi me-2" width="80" height="32"><use xlink:href="#bootstrap"></use></svg>
+      </header> 
+      
+      <img src="" alt="">
+
+      <div class="container">
+        <h3 class="zagoltrans">Национальный университет обороны имени Первого Президента РК - Елбасы</h3>
+        <div class="myBtn" onclick="location.href='/pasport/'">
+          Назад
+        </div>
+        <div class="bigBlock">
+          <div class="formField">
+            <label for="">Марка автомобиля</label>
+            <input type="text" value="{{cars.marka_avto}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Военный номерной регистрационный знак</label>
+            <input type="text" value="{{cars.voenni_reg_nomer}}" disabled>
+          </div>
+        </div>
+        <div class="imagesBlock">
+          <img src="../media/{{cars.photo_front}}" alt="">
+          <img src="../media/{{cars.photo_site}}" alt="">
+          <img src="../media/{{cars.photo_back}}" alt="">
+          <img src="../media/{{cars.photo_engine}}" alt="">
+          <img src="../media/{{cars.photo_trunk}}" alt="">
+        </div>
+        <div class="bigBlock">
+          <div class="myBtn" onclick="window.location.replace('../main/main/{{cars.field_p_p}}/change/')">
+            Изменить
+          </div>
+
+          <div class="formField">
+            <label for="">ID</label>
+            <input type="text" value="{{cars.field_p_p}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">РГК</label>
+            <input type="text" value="{{cars.rgk}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Род войск</label>
+            <input type="text" value="{{cars.rod_voiska}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Город</label>
+            <input type="text" value="{{cars.gorod}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Номер воинской части</label>
+            <input type="text" value="{{cars.field_voinsnkoi_chasti}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Подразделение</label>
+            <input type="text" value="{{cars.podrazdelenia}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Основание постановки техники на учет</label>
+            <input type="text" value="{{cars.osnov_postanovki_tech_na_uchet}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Тип</label>
+            <input type="text" value="{{cars.type}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Группа эксплуатации</label>
+            <input type="text" value="{{cars.gruppa_ekspluatacii}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">№  Шасси</label>
+            <input type="text" value="{{cars.field_shassi}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">№ двигателя</label>
+            <input type="text" value="{{cars.field_dvigatelia}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">№ кабины</label>
+            <input type="text" value="{{cars.field_kabini}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Год выпуска</label>
+            <input type="text" value="{{cars.god_vipuska}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Серия и номер паспорта</label>
+            <input type="text" value="{{cars.seria_nomer_pasporta}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Цвет</label>
+            <input type="text" value="{{cars.color}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Номер свидетельства о регистрации</label>
+            <input type="text" value="{{cars.nomer_svedit_o_reg}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Категория</label>
+            <input type="text" value="{{cars.category}}" disabled>
+          </div>
+          <div class="divider"></div>
+          
+          <div class="container" style="width: 1000px; border-width: 3px; border-color: #cfcfcf;">
+            <h3 class="goda" style="text-align: center;">Пробег</h3>
+            <div class="row mt-4">
+              <div class="col">
+                <table class="table table-hover">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col" class="th1" style="background-color: rgb(21, 21, 146);"><p>Месяцы</p></th>
+                      <th scope="col" class="th1" style="background-color: rgb(21, 21, 146);"><p>2020</p></th>
+                      <th scope="col" class="th1" style="background-color: rgb(21, 21, 146);"><p>2021</p></th>
+                      <th scope="col" class="th1" style="background-color: rgb(21, 21, 146);"><p>2022</p></th>
+                      <th scope="col" class="th1" style="background-color: rgb(21, 21, 146);"><p>2023</p></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Январь</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.january_2020}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.january_2021}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.january_2022}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.january_2023}}</p></td>
+                  </tbody>
+                  <tbody>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Февраль</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.february_2020}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.february_2021}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.february_2022}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.february_2023}}</p></td>
+                  </tbody>
+                  <tbody>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Март</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.march_2020}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.march_2021}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.march_2022}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.march_2023}}</p></td>
+                  </tbody>
+                  <tbody>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Апрель</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.april_2020}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.april_2021}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.april_2022}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.april_2023}}</p></td>
+                  </tbody>
+                  <tbody>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Май</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.may_2020}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.may_2021}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.may_2022}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.may_2023}}</p></td>
+                  </tbody>
+                  <tbody>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Июнь</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.june_2020}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.june_2021}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.june_2022}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.june_2023}}</p></td>
+                  </tbody>
+                  <tbody>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Июль</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.july_2020}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.july_2021}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.july_2022}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.july_2023}}</p></td>
+                  </tbody>
+                  <tbody>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Август</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.august_2020}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.august_2021}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.august_2022}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.august_2023}}</p></td>
+                  </tbody>
+                  <tbody>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Сентябрь</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.september_2020}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.september_2021}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.september_2022}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.september_2023}}</p></td>
+                  </tbody>
+                  <tbody>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Октябрь</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.october_2020}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.october_2021}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.october_2022}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.october_2023}}</p></td>
+                  </tbody>
+                  <tbody>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Ноябрь</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.november_2020}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.november_2021}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.november_2022}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.november_2023}}</p></td>
+                  </tbody>
+                  <tbody>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Декабрь</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.december_2020}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.december_2021}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.december_2022}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.december_2023}}</p></td>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="formField">
+            <label for="">Показания спидометра на 1.01.2022</label>
+            <input type="text" value="{{cars.speedometer_01_01_2022}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Выделено моторесурсов на год</label>
+            <input type="text" value="{{cars.videleno_motoresurs_na_year}}" disabled>
+          </div>
+          <!-- <div class="formField">
+            <label for="">Январь</label>
+            <input type="text" value="{{cars.january_2022}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Февраль</label>
+            <input type="text" value="{{cars.february_2022}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Март</label>
+            <input type="text" value="{{cars.march_2022}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Апрель</label>
+            <input type="text" value="{{cars.april_2022}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Май</label>
+            <input type="text" value="{{cars.may_2022}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Июнь</label>
+            <input type="text" value="{{cars.june_2022}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Июль</label>
+            <input type="text" value="{{cars.july_2022}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Август</label>
+            <input type="text" value="{{cars.august_2022}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Сентябрь</label>
+            <input type="text" value="{{cars.september_2022}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Октябрь</label>
+            <input type="text" value="{{cars.october_2022}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Ноябрь</label>
+            <input type="text" value="{{cars.november_2022}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Декабрь</label>
+            <input type="text" value="{{cars.december_2022}}" disabled>
+          </div> -->
+          <div class="formField">
+            <label for="">Израсходовано моторесурсов с начало года</label>
+            <input type="text" value="{{cars.izrashodovano_s_nachalo_year}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Остаток моторесурсов до конца года</label>
+            <input type="text" value="{{cars.ostatok_resursov_do_konca_year}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Пробег с начала эксплуатации</label>
+            <input type="text" value="{{cars.mileage_from_beginning}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Техническое состояние</label>
+            <input type="text" value="{{cars.tech_sostoianie}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Вид и дата проведенного ремонта</label>
+            <input type="text" value="{{cars.vid_and_data_remonta}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Примечание</label>
+            <input type="text" value="{{cars.primechanie}}" disabled>
+          </div>
+          <div class="divider"></div>
+          <div class="formField">
+            <label for="">Осталось моторесурсов до ТО № 1</label>
+            <input type="text" value="{{cars.motoresurs_to_1}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Осталось моторесурсов до ТО № 2</label>
+            <input type="text" value="{{cars.motoresurs_to_2}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Осталось моторесурсов до ТР</label>
+            <input type="text" value="{{cars.ostalos_motoresurs_tp}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Осталось моторесурсов до СР</label>
+            <input type="text" value="{{cars.ostalos_motoresurs_cp}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Осталось моторесурсов до КР</label>
+            <input type="text" value="{{cars.ostalos_motoresurs_kp}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Осталось моторесурсов до списания</label>
+            <input type="text" value="{{cars.ostalos_motoresurs_spisanie}}" disabled>
+          </div>
+          <div class="divider"></div>
+          <div class="formField">
+            <label for="">Тип АКБ</label>
+            <input type="text" value="{{cars.type_akb}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Количество АКБ</label>
+            <input type="text" value="{{cars.kolichestvo_akb}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Кем выдано</label>
+            <input type="text" value="{{cars.kev_vidano}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">№ наряда и когда выдано</label>
+            <input type="text" value="{{cars.field_nariad_kogda_vidano}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Срок службы</label>
+            <input type="text" value="{{cars.srok_sluzhbi_akb}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Дата установки АКБ</label>
+            <input type="text" value="{{cars.data_ustanovki_akb}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Дата списания АКБ по годам</label>
+            <input type="text" value="{{cars.data_spisania_akb_po_godam}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Срок службы в тыс. км.  пробега до списания АКБ</label>
+            <input type="text" value="{{cars.srok_sluzhbi_akb_v_km_do_spisania}}" disabled>
+          </div>
+
+          <div class="container" style="width: 1000px; border-width: 3px; border-color: #cfcfcf;">
+            <h3 class="goda" style="text-align: center;">Пробег АКБ</h3>
+            <div class="row mt-4">
+              <div class="col">
+                <table class="table table-hover">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col" class="th1" style="background-color: rgb(21, 21, 146);"><p>Месяцы</p></th>
+                      <th scope="col" class="th1" style="background-color: rgb(21, 21, 146);"><p>2020</p></th>
+                      <th scope="col" class="th1" style="background-color: rgb(21, 21, 146);"><p>2021</p></th>
+                      <th scope="col" class="th1" style="background-color: rgb(21, 21, 146);"><p>2022</p></th>
+                      <th scope="col" class="th1" style="background-color: rgb(21, 21, 146);"><p>2023</p></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Январь</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_january_2020}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_january_2021}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_january_2022}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_january_2023}}</p></td>
+                  </tbody>
+                  <tbody>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Февраль</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_february_2020}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_february_2021}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_february_2022}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_february_2023}}</p></td>
+                  </tbody>
+                  <tbody>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Март</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_march_2020}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_march_2021}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_march_2022}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_march_2023}}</p></td>
+                  </tbody>
+                  <tbody>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Апрель</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_april_2020}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_april_2021}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_april_2022}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_april_2023}}</p></td>
+                  </tbody>
+                  <tbody>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Май</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_may_2020}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_may_2021}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_may_2022}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_may_2023}}</p></td>
+                  </tbody>
+                  <tbody>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Июнь</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_june_2020}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_june_2021}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_june_2022}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_june_2023}}</p></td>
+                  </tbody>
+                  <tbody>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Июль</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_july_2020}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_july_2021}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_july_2022}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_july_2023}}</p></td>
+                  </tbody>
+                  <tbody>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Август</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_august_2020}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_august_2021}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_august_2022}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_august_2023}}</p></td>
+                  </tbody>
+                  <tbody>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Сентябрь</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_september_2020}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_september_2021}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_september_2022}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_september_2023}}</p></td>
+                  </tbody>
+                  <tbody>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Октябрь</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_october_2020}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_october_2021}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_october_2022}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_october_2023}}</p></td>
+                  </tbody>
+                  <tbody>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Ноябрь</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_november_2020}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_november_2021}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_november_2022}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_november_2023}}</p></td>
+                  </tbody>
+                  <tbody>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Декабрь</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_december_2020}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_december_2021}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_december_2022}}</p></td>
+                    <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{cars.akb_december_2023}}</p></td>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="formField">
+            <label for="">Пройдено километров с момента установки АКБ</label>
+            <input type="text" value="{{cars.proideno_km_from_beginning_akb}}" disabled>
+          </div>
+          <div class="formField">
+            <label for="">Осталось км. до списания</label>
+            <input type="text" value="{{cars.akb_ostalos_km_do_spisania}}" disabled>
+          </div>
+        </div>
+
+        <h2 style="text-align: center; color: #17a2b8;">Автошины</h2>
+        
+        <div class="bigBlock1">
+          <div id="left_info" style="width: 50%; float: left">
+            <div class="myBtn1" onclick="window.location.replace('../main/avtoshininew/{{shin.id_shin}}/change/')">
+              Изменить
+            </div>
+            <div class="formField">
+              <label for="">ID шин</label>
+              <input type="text" value="{{shin.id_shin}}" disabled>
+            </div>
+            <div class="formField">
+              <label for="">Тип шины</label>
+              <input type="text" value="{{shin.type_shin}}" disabled>
+            </div>
+            <div class="formField">
+              <label for="">ID техники</label>
+              <input type="text" value="{{shin.id_techniki}}" disabled>
+            </div>
+            <div class="formField">
+              <label for="">Размер шин</label>
+              <input type="text" value="{{shin.razmer_shin}}" disabled>
+            </div>
+            <div class="formField">
+              <label for="">Количество шин</label>
+              <input type="text" value="{{shin.kolichestvo_shin}}" disabled>
+            </div>
+            <div class="formField">
+              <label for="">Кем выдано</label>
+              <input type="text" value="{{shin.kem_vidano}}" disabled>
+            </div>
+            <div class="formField">
+              <label for="">№ наряда и когда выданы шины</label>
+              <input type="text" value="{{shin.field_nariad_kogda_vidano}}" disabled>
+            </div>
+            <div class="formField">
+              <label for="">Дата установки шин</label>
+              <input type="text" value="{{shin.data_ustanovki_shini}}" disabled>
+            </div>
+            <div class="formField">
+              <label for="">Срок службы в км. до списания шин</label>
+              <input type="text" value="{{shin.srok_sluzhbi_v_km}}" disabled>
+            </div>
+            <br>
+
+            <div class="container" style="width: 500px; border-width: 3px; border-color: #cfcfcf;">
+              <h4 class="goda" style="text-align: center;">Пробег шины</h4>
+              <div class="row mt-4">
+                <div class="col">
+                  <table class="table table-hover">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col" class="th1" style="background-color: rgb(21, 21, 146);"><p>Месяцы</p></th>
+                        <th scope="col" class="th1" style="background-color: rgb(21, 21, 146);"><p>2020</p></th>
+                        <th scope="col" class="th1" style="background-color: rgb(21, 21, 146);"><p>2021</p></th>
+                        <th scope="col" class="th1" style="background-color: rgb(21, 21, 146);"><p>2022</p></th>
+                        <th scope="col" class="th1" style="background-color: rgb(21, 21, 146);"><p>2023</p></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Январь</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.january_2020}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.january_2021}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.january_2022}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.january_2023}}</p></td>
+                    </tbody>
+                    <tbody>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Февраль</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.february_2020}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.february_2021}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.february_2022}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.february_2023}}</p></td>
+                    </tbody>
+                    <tbody>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Март</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.march_2020}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.march_2021}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.march_2022}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.march_2023}}</p></td>
+                    </tbody>
+                    <tbody>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Апрель</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.april_2020}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.april_2021}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.april_2022}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.april_2023}}</p></td>
+                    </tbody>
+                    <tbody>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Май</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.may_2020}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.may_2021}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.may_2022}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.may_2023}}</p></td>
+                    </tbody>
+                    <tbody>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Июнь</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.june_2020}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.june_2021}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.june_2022}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.june_2023}}</p></td>
+                    </tbody>
+                    <tbody>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Июль</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.july_2020}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.july_2021}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.july_2022}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.july_2023}}</p></td>
+                    </tbody>
+                    <tbody>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Август</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.august_2020}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.august_2021}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.august_2022}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.august_2023}}</p></td>
+                    </tbody>
+                    <tbody>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Сентябрь</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.september_2020}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.september_2021}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.september_2022}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.september_2023}}</p></td>
+                    </tbody>
+                    <tbody>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Октябрь</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.october_2020}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.october_2021}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.october_2022}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.october_2023}}</p></td>
+                    </tbody>
+                    <tbody>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Ноябрь</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.november_2020}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.november_2021}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.november_2022}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.november_2023}}</p></td>
+                    </tbody>
+                    <tbody>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Декабрь</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.december_2020}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.december_2021}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.december_2022}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin.december_2023}}</p></td>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            
+            <div class="formField">
+              <label for="">Пройдено километров с момента установки шин</label>
+              <input type="text" value="{{shin.proideno_km_from_beginning}}" disabled>
+            </div>
+            <div class="formField">
+              <label for="">Пройдено км с момента установки с учетом запасного колеса</label>
+              <input type="text" value="{{shin.proideno_km_from_beginning_uchetom_zapasnogo}}" disabled>
+            </div>
+            <div class="formField">
+              <label for="">Осталось километров до списания (с учетом запасного колеса)</label>
+              <input type="text" value="{{shin.ostalos_km_do_spisania}}" disabled>
+            </div>
+          </div>
+
+          <div id="right_info" style="width: 50%; float: right">
+            <div class="myBtn1" onclick="window.location.replace('../main/avtoshininew/{{shin2.id_shin}}/change/')">
+              Изменить
+            </div>
+            <div class="formField">
+              <label for="">ID шин</label>
+              <input type="text" value="{{shin2.id_shin}}" disabled>
+            </div>
+            <div class="formField">
+              <label for="">Тип шины</label>
+              <input type="text" value="{{shin2.type_shin}}" disabled>
+            </div>
+            <div class="formField">
+              <label for="">ID техники</label>
+              <input type="text" value="{{shin2.id_techniki}}" disabled>
+            </div>
+            <div class="formField">
+              <label for="">Размер шин</label>
+              <input type="text" value="{{shin2.razmer_shin}}" disabled>
+            </div>
+            <div class="formField">
+              <label for="">Количество шин</label>
+              <input type="text" value="{{shin2.kolichestvo_shin}}" disabled>
+            </div>
+            <div class="formField">
+              <label for="">Кем выдано</label>
+              <input type="text" value="{{shin2.kem_vidano}}" disabled>
+            </div>
+            <div class="formField">
+              <label for="">№ наряда и когда выданы шины</label>
+              <input type="text" value="{{shin2.field_nariad_kogda_vidano}}" disabled>
+            </div>
+            <div class="formField">
+              <label for="">Дата установки шин</label>
+              <input type="text" value="{{shin2.data_ustanovki_shini}}" disabled>
+            </div>
+            <div class="formField">
+              <label for="">Срок службы в км. до списания шин</label>
+              <input type="text" value="{{shin2.srok_sluzhbi_v_km}}" disabled>
+            </div>
+            <br>
+
+            <div class="container" style="width: 500px; border-width: 3px; border-color: #cfcfcf;">
+              <h4 class="goda" style="text-align: center;">Пробег шины</h4>
+              <div class="row mt-4">
+                <div class="col">
+                  <table class="table table-hover">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col" class="th1" style="background-color: rgb(21, 21, 146);"><p>Месяцы</p></th>
+                        <th scope="col" class="th1" style="background-color: rgb(21, 21, 146);"><p>2020</p></th>
+                        <th scope="col" class="th1" style="background-color: rgb(21, 21, 146);"><p>2021</p></th>
+                        <th scope="col" class="th1" style="background-color: rgb(21, 21, 146);"><p>2022</p></th>
+                        <th scope="col" class="th1" style="background-color: rgb(21, 21, 146);"><p>2023</p></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Январь</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.january_2020}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.january_2021}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.january_2022}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.january_2023}}</p></td>
+                    </tbody>
+                    <tbody>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Февраль</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.february_2020}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.february_2021}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.february_2022}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.february_2023}}</p></td>
+                    </tbody>
+                    <tbody>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Март</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.march_2020}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.march_2021}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.march_2022}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.march_2023}}</p></td>
+                    </tbody>
+                    <tbody>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Апрель</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.april_2020}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.april_2021}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.april_2022}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.april_2023}}</p></td>
+                    </tbody>
+                    <tbody>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Май</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.may_2020}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.may_2021}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.may_2022}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.may_2023}}</p></td>
+                    </tbody>
+                    <tbody>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Июнь</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.june_2020}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.june_2021}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.june_2022}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.june_2023}}</p></td>
+                    </tbody>
+                    <tbody>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Июль</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.july_2020}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.july_2021}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.july_2022}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.july_2023}}</p></td>
+                    </tbody>
+                    <tbody>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Август</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.august_2020}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.august_2021}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.august_2022}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.august_2023}}</p></td>
+                    </tbody>
+                    <tbody>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Сентябрь</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.september_2020}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.september_2021}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.september_2022}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.september_2023}}</p></td>
+                    </tbody>
+                    <tbody>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Октябрь</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.october_2020}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.october_2021}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.october_2022}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.october_2023}}</p></td>
+                    </tbody>
+                    <tbody>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Ноябрь</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.november_2020}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.november_2021}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.november_2022}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.november_2023}}</p></td>
+                    </tbody>
+                    <tbody>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>Декабрь</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.december_2020}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.december_2021}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.december_2022}}</p></td>
+                      <td class="td1" style="background-color: rgb(230, 230, 230); vertical-align: middle;"><p>{{shin2.december_2023}}</p></td>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            
+            <div class="formField">
+              <label for="">Пройдено километров с момента установки шин</label>
+              <input type="text" value="{{shin2.proideno_km_from_beginning}}" disabled>
+            </div>
+            <div class="formField">
+              <label for="">Пройдено км с момента установки с учетом запасного колеса</label>
+              <input type="text" value="{{shin2.proideno_km_from_beginning_uchetom_zapasnogo}}" disabled>
+            </div>
+            <div class="formField">
+              <label for="">Осталось километров до списания (с учетом запасного колеса)</label>
+              <input type="text" value="{{shin2.ostalos_km_do_spisania}}" disabled>
+            </div>
+          </div>
+        </div>
+
+      </div>
+<!-- 
+      <script>
+
+        // function getParam(param){
+        // return new URLSearchParams(window.location.search).get(param);
+        // }
+
+        // const id = getParam('id');
+        let link = {{id}}
+      </script> -->
+
+</body>
+</html>

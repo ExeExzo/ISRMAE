@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+    <title>ISMTO</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static '\main\css\style.css' %}">
+</head>
+<body>
+  
+      <header class="d-flex justify-content-center py-3 heade">
+        <svg class="bi me-2" width="80" height="32"><use xlink:href="#bootstrap"></use></svg>
+
+        <a  class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Coat_of_arms_military-of-kazakhstan.svg/1200px-Coat_of_arms_military-of-kazakhstan.svg.png" alt="" style="height: 70px; margin-right: 15px;">
+            <p class="text-warning" >Информационная система <br>учета состояния военной автомобильной техники</p>
+          </a>
+
+
+          <a href="/main/" class="bar">Главная</a>
+          <a href="/statistics/" class="bar">Аналитика</a>
+          <a href="{% url 'admin:index' %}" class="bar">Объект АТ</a>
+          <span class="bar">Имя: {{request.user}}</span>
+          <span class="bar"><a href="{% url 'logout' %}" class="bar">Выйти</a></span>
+
+
+        <svg class="bi me-2" width="80" height="32"><use xlink:href="#bootstrap"></use></svg>
+      </header>
+
+      <div class="rod_voiska">
+        <h3 class="zagol">Перечень АТ</h3>
+        <a href="/pasport_ckp/"><button type="button" class="btn rod">ЦКП</button></a>
+        <a href="/pasport_gus/"><button type="button" class="btn rod">ГУС</button></a>
+        <a href="/pasport_domr/"><button type="button" class="btn rod">ДОМР</button></a>
+        <a href="/pasport_gut/"><button type="button" class="btn rod">ГУТ</button></a>
+        <a href="/pasport_gsh/"><button type="button" class="btn rod">ГШ</button></a><br>
+        <a href="/pasport_dvon/"><button type="button" class="btn rod">ДВОН</button></a>
+        <a href="/pasport_guvp/"><button type="button" class="btn rod">ГУВП ВС РК</button></a>
+        <a href="/pasport_vms/"><button type="button" class="btn rod">ВМС</button></a>
+        <a href="/pasport_svo/"><button type="button" class="btn rod">СВО ВС РК</button></a>
+        <a href="/pasport_zapad/"><button type="button" class="btn rod">Ргк"Запад"</button></a><br>
+        <a href="/pasport_dshv/"><button type="button" class="btn rod">ДШВ</button></a>
+        <a href="/pasport_astana/"><button type="button" class="btn rod">Ргк"Астана"</button></a>
+        <a href="/pasport_vostok/"><button type="button" class="btn rod">Ргк"Восток"</button></a>
+        <a href="/pasport_chnp/"><button type="button" class="btn rod">ЧНП СВВСРК</button></a>
+        <a href="/pasport_yug/"><button type="button" class="btn rod">Ргк"Юг"</button></a><br>
+        <a href="/pasport_untiv/"><button type="button" class="btn rod">ЧНП УНТиВ</button></a>
+        <a href="/pasport_gusv/"><button type="button" class="btn rod">ГУСВ ВС РК</button></a>
+        <a href="/pasport_grau/"><button type="button" class="btn rod">ГРАУ ВС РК</button></a>
+        <a href="/pasport_gurv/"><button type="button" class="btn rod">ГУРВ ВС РК</button></a>
+        <a href="/pasport_14/"><button type="button" class="btn rod">14</button></a><br>
+        <a href="/pasport_guv/"><button type="button" class="btn rod">ГУВ ВС РК</button></a>
+        <a href="/pasport/"><button type="button" class="btn rod">Example</button></a>
+      </div>
+
+
+      <footer class="page-footer font-small blue vniz" style="left: 0;position: fixed; text-align: center; bottom: 0; width: 100%;"> 
+
+      
+      </footer>
+</body>
+</html>
